@@ -13,14 +13,18 @@ module.exports = class QueueCommand extends Command {
 
 	run(message, args) {
 		const teamCaptainRole = message.guild.roles.get('300601294706442241');
+		console.log(`Name: ${teamCaptainRole.name}`);
 		const queueRoom = message.guild.channels.get('163508200589623298');
-		const membersToMove = message.guild.members.filter(member => member.roles.has(teamCaptainRole) && member.voiceChannel);
+		console.log(`Name: ${queueRoom.name}`);
+		const membersToMove = message.guild.members.filter(member => member.roles.exists(teamCaptainRole) && member.voiceChannel);
+		console.log(membersToMove.map(m => m.name));
 
-		membersToMove.map(mem => mem.setVoiceChannel(queueRoom));
+		membersToMove.forEach(mem => mem.setVoiceChannel(queueRoom));
 
 		message.reply(stripIndents`
 			Moved these users to the queue room.
 			
-			⊳ ${membersToMove.map(mem => mem.displayName).join('\n⊳ ')}`);
+			⊳ ${membersToMove.map(mem => mem.displayName).join('\n⊳ ')}
+		`);
 	}
 };
