@@ -23,7 +23,7 @@ module.exports = class CaptainCommand extends Command {
 				message.reply(`**${member.displayName}** has been given the **${roleToGive.name}** role for 6 hours. This will be removed automatically.\n*unless i break during that time :')*`);
 				setTimeout(() => {
 					mem.removeRole(roleToGive);
-				}, 10000);
+				}, 21600000); // 6 hours in ms
 			});
 		}
 	}
