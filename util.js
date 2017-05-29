@@ -7,7 +7,7 @@ function findUser(message, args) {
 }
 
 function findMember(message, args) {
-	return message.guild.fetchMember(findUser(message, args));
+	return message.guild.members.get(findUser(message, args).id);
 }
 
 function error(errorText, message) {

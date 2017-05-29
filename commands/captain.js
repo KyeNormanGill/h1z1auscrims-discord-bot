@@ -12,9 +12,8 @@ module.exports = class CaptainCommand extends Command {
 	}
 
 	run(message, args) {
-		let member;
-		findMember(message, args).then(mem => member = mem); // eslint-disable-line
-
+		const member = findMember(message, args);
+		console.log(member);
 		if (member === null) {
 			error('Please input a valid user', message);
 		} else {
