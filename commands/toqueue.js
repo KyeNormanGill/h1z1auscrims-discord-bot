@@ -17,7 +17,9 @@ module.exports = class QueueCommand extends Command {
 		const queueRoom = message.guild.channels.get('163508200589623298');
 		console.log(`Name: ${queueRoom.name}`);
 		const membersToMove = message.guild.members.filter(member => member.roles.exists(teamCaptainRole) && member.voiceChannel);
+		console.log('1');
 		console.log(membersToMove.map(m => m.name));
+		console.log('2');
 
 		membersToMove.forEach(mem => mem.setVoiceChannel(queueRoom));
 
