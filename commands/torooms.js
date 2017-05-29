@@ -18,7 +18,7 @@ module.exports = class RoomCommand extends Command {
 		const membersToMove = queueRoom.members.filter(member => member.roles.has(teamCaptainRole));
 		const voiceChannels = message.guild.channels.filter(channel => channel.type === 'voice');
 
-		membersToMove.map(mem => {
+		membersToMove.forEach(mem => {
 			const teamRole = mem.roles.filter(role => role !== adminRole || role.id !== message.member.guild.id).first();
 			mem.setVoiceChannel(voiceChannels.find('name', teamRole.name));
 		});
