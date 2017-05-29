@@ -15,6 +15,7 @@ module.exports = class QueueCommand extends Command {
 		const teamCaptainRole = message.guild.roles.get('300601294706442241');
 		const queueRoom = message.guild.channels.get('163508200589623298');
 		const membersToMove = message.guild.members.filter(member => member.roles.has(teamCaptainRole.id) && member.voiceChannel);
+
 		if (membersToMove.size === 0) return message.reply('There are no Team captains currently in a voice channel!');
 
 		membersToMove.forEach(mem => mem.setVoiceChannel(queueRoom));
@@ -26,7 +27,3 @@ module.exports = class QueueCommand extends Command {
 		`);
 	}
 };
-
-function movePerson(member, channel) {
-	
-}
