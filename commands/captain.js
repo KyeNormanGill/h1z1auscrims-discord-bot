@@ -4,11 +4,10 @@ const { findMember, error } = require('../util.js');
 module.exports = class CaptainCommand extends Command {
 	constructor() {
 		super({
-			name: 'template',
-			description: 'This is a template command.',
-			guildOnly: false,
-			ownerOnly: true,
-			aliases: ['temp', 'late']
+			name: 'captain',
+			description: 'Gives the team captain role to a user for 6 hours. For use with the toqueue and toroom command.',
+			guildOnly: true,
+			ownerOnly: true
 		});
 	}
 
