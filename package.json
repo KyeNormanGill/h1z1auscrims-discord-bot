@@ -1,0 +1,22 @@
+{
+  "name": "h1z1auscrims-discord-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KyeNormanGill/h1z1auscrims-discord-bot.git"
+  },
+  "keywords": [
+    "discord"
+  ],
+  "author": "Kye Norman-Gil",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KyeNormanGill/h1z1auscrims-discord-bot/issues"
+  },
+  "homepage": "https://github.com/KyeNormanGill/h1z1auscrims-discord-bot#readme"
+}
