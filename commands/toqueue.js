@@ -12,25 +12,17 @@ module.exports = class QueueCommand extends Command {
 	}
 
 	run(message, args) {
-		try {
-			const teamCaptainRole = message.guild.roles.get('300601294706442241');
-			console.log(`Name: ${teamCaptainRole.name}`);
-			const queueRoom = message.guild.channels.get('163508200589623298');
-			console.log(`Name: ${queueRoom.name}`);
-			const membersToMove = message.guild.members.filter(member => member.roles.has(teamCaptainRole.id) && member.voiceChannel);
-			console.log('1');
-			console.log(membersToMove.map(m => m.name));
-			console.log('2');
+		const teamCaptainRole = message.guild.roles.get('300601294706442241');
+		const queueRoom = message.guild.channels.get('163508200589623298');
+		const membersToMove = message.guild.members.filter(member => member.roles.has(teamCaptainRole.id) && member.voiceChannel);
+		if (membersToMove.size === 0) return message.reply('There are no Team captains currently in a voice channel!');
 
-			membersToMove.forEach(mem => mem.setVoiceChannel(queueRoom));
+		membersToMove.forEach(mem => mem.setVoiceChannel(queueRoom));
 
-			message.reply(stripIndents`
-				Moved these users to the queue room.
-				
-				⊳ ${membersToMove.map(mem => mem.displayName).join('\n⊳ ')}
-			`);
-		} catch (err) {
-			console.log(err);
-		}
+		return message.reply(stripIndents`
+			Moved these users to the queue room.
+			
+			⊳ ${membersToMove.map(mem => mem.displayName).join('\n⊳ ')}
+		`);
 	}
 };
