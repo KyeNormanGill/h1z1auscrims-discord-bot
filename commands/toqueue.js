@@ -26,3 +26,7 @@ module.exports = class QueueCommand extends Command {
 		`);
 	}
 };
+
+function movePerson(member, channel) {
+	
+}

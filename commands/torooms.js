@@ -22,6 +22,8 @@ module.exports = class RoomCommand extends Command {
 			const teamRole = mem.roles.filter(role => role !== adminRole && role.id !== message.member.guild.id).first();
 			const voiceChannel = voiceChannels.find('name', teamRole.name);
 			mem.setVoiceChannel(voiceChannel);
+			console.log(`TeamRole: ${teamRole.name}`);
+			console.log(`VoiceChannel: ${voiceChannel.name}`);
 		});
 
 		message.reply(stripIndents`
