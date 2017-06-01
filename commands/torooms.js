@@ -20,9 +20,7 @@ module.exports = class RoomCommand extends Command {
 		const voiceChannels = message.guild.channels.filter(channel => channel.type === 'voice');
 
 		membersToMove.forEach(mem => {
-			mem.roles.forEach(role => console.log(role.name));
 			const teamRole = mem.roles.filter(role => role !== adminRole && role.id !== message.member.guild.id && role.id !== '300601294706442241').first();
-			console.log(teamRole.name);
 			if (!teamRole) return;
 			const voiceChannel = voiceChannels.find('name', teamRole.name);
 			mem.setVoiceChannel(voiceChannel);
