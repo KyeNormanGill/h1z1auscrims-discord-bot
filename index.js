@@ -11,4 +11,22 @@ const client = new Smooth.Client({
 	errorResponse: true
 });
 
+let gameTick = 0;
+const notifs = [
+	'2tapping cunts',
+	'bio bombing 5mans',
+	'running man :(',
+	'I POINT BLANKED HIM WITH A SHOTTY',
+	'and you\'re getting reported',
+	'HE\'s IN THE GROUND',
+	'Daybreak fix ya games'
+];
+
 client.login(token);
+
+client.on('ready', () => {
+	setInterval(() => {
+		client.user.setGame(notifs[gameTick]);
+		if (++gameTick === notifs.length) gameTick = 0;
+	}, 300000);
+});

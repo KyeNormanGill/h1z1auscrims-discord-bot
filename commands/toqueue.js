@@ -11,7 +11,7 @@ module.exports = class QueueCommand extends Command {
 		});
 	}
 
-	run(message, args) {
+	run(message) {
 		const teamCaptainRole = message.guild.roles.get('300601294706442241');
 		const queueRoom = message.guild.channels.get('163508200589623298');
 		const membersToMove = message.guild.members.filter(member => member.roles.has(teamCaptainRole.id) && member.voiceChannel);

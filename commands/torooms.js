@@ -26,7 +26,7 @@ module.exports = class RoomCommand extends Command {
 			mem.setVoiceChannel(voiceChannel);
 		});
 
-		message.reply(stripIndents`
+		return message.reply(stripIndents`
 			Moved these users back to their team rooms.
 			
 			⊳ ${membersToMove.map(mem => mem.displayName).join('\n⊳ ')}`);
