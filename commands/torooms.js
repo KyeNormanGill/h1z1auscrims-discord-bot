@@ -16,7 +16,7 @@ module.exports = class RoomCommand extends Command {
 		const adminRole = message.guild.roles.get('292271962544275456');
 		const membersToMove = queueRoom.members.filter(member => member.voiceChannel);
 
-		if (membersToMove.size === 0) return message.reply('There\'s no one in any channels?');
+		if (membersToMove.size === 0) return message.reply('There\'s no team members in any channels?');
 
 		const voiceChannels = message.guild.channels.filter(channel => channel.type === 'voice');
 
