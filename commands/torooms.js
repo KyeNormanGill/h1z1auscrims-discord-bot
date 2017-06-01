@@ -11,10 +11,9 @@ module.exports = class RoomCommand extends Command {
 		});
 	}
 
-	run(message, args) {
-		const queueRoom = message.guild.channels.get('163508200589623298');
+	run(message) {
 		const adminRole = message.guild.roles.get('292271962544275456');
-		const membersToMove = queueRoom.members.filter(member => member.voiceChannel);
+		const membersToMove = message.guild.members.filter(member => member.voiceChannel);
 
 		if (membersToMove.size === 0) return message.reply('Can\'t find any team members in voice channels.');
 
