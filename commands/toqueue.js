@@ -21,9 +21,8 @@ module.exports = class QueueCommand extends Command {
 		membersToMove.forEach(mem => mem.setVoiceChannel(queueRoom));
 
 		return message.reply(stripIndents`
-			Moved these users to the queue room.
-			
-			⊳ ${membersToMove.map(mem => mem.displayName).join('\n⊳ ')}
+			Moving **${membersToMove.size}** team captains to the queue room...
+			**This might take up to 20 seconds...**
 		`);
 	}
 };

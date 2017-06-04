@@ -32,8 +32,8 @@ module.exports = class RoomCommand extends Command {
 		});
 
 		return message.reply(stripIndents`
-			Moved these users back to their team rooms.
-			
-			⊳ ${membersToMove.map(mem => mem.displayName).join('\n⊳ ')}`);
+			Moving **${membersToMove.size}** to their rooms...
+			**This might take up to 20 seconds...**
+		`);
 	}
 };

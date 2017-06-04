@@ -5,7 +5,6 @@ const { stripIndents } = require('common-tags');
 const moment = require('moment');
 
 const client = new Smooth.Client({
-	// eslint-disable-next-line
 	owners: ['135991380760592384', '142858948058284032', '135991380760592384', '189696688657530880'],
 	prefix: '-',
 	commandDirectory: path.join(__dirname, 'commands'),
