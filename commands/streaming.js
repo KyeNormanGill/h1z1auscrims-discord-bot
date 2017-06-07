@@ -18,8 +18,9 @@ module.exports = class StreamingCommand extends Command {
 		let count = 1;
 		let max = 0;
 
-		message.guild.members.filter(member => member.user.presence.game && member.user.presence.game.streaming).forEach(mem => {
-			max = mem.size;
+		const users = message.guild.members.filter(member => member.user.presence.game && member.user.presence.game.streaming);
+		max = users.size;
+		users.forEach(mem => {
 			console.log(`${max} max`);
 			console.log(`${count} current`);
 			const streamID = mem.user.presence.game.url.split('/').slice(3).join();
