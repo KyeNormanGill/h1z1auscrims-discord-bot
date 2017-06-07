@@ -8,7 +8,6 @@ module.exports = class StreamingCommand extends Command {
 			name: 'streaming',
 			description: 'Displays who is streaming in this discord.',
 			guildOnly: true,
-			ownerOnly: true,
 			aliases: ['whosstreaming', 'live']
 		});
 	}
