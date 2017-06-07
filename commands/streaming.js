@@ -14,7 +14,7 @@ module.exports = class StreamingCommand extends Command {
 	}
 
 	run(message, args) {
-		let text = `User streaming in **${message.guild.name}**\n\n`;
+		let text = `Users streaming in **${message.guild.name}**\n\n`;
 		let count = 0;
 		let max = 0;
 
@@ -30,14 +30,14 @@ module.exports = class StreamingCommand extends Command {
 			const url = `https://api.twitch.tv/kraken/streams/${streamID}?client_id=${twitch}`;
 			snekfetch.get(url).then(res => {
 				text += `${mem.displayName} - ${res.body.stream.game} - <${res.body.stream.channel.url}>\n`;
+			}).then(() => {
+				count++;
+
+				if (count === max) {
+					message.channel.send(text);
+					console.log('is last');
+				}
 			});
-
-			count++;
-
-			if (count === max) {
-				message.channel.send(text);
-				console.log('is last');
-			}
 		});
 	}
 };
