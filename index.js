@@ -38,3 +38,5 @@ client.on('guildMemberRemove', member => {
 });
 
 client.on('presenceUpdate', (oldM, newM) => require('./events/presenceUpdate.js').handleEvent(oldM, newM));
+
+process.on('unhandledRejection', console.error);
