@@ -23,8 +23,7 @@ module.exports = class StreamingCommand extends Command {
 				console.log(res.body);
 				text += `${mem.displayName} - ${res.body.stream.game} - <${res.body.stream.channel.url}>\n`;
 			});
-		}).then(() => {
-			message.channel.send(text);
 		});
+		console.log(text);
 	}
 };
