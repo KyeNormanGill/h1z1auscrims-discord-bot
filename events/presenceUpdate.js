@@ -1,4 +1,4 @@
-const twitchKey = require('./../info.json').twitch;
+const twitchKey = require('./../config.json').twitch;
 const snekfetch = require('snekfetch');
 const fs = require('fs');
 const path = require('path');
