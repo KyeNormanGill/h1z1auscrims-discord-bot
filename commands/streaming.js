@@ -20,6 +20,9 @@ module.exports = class StreamingCommand extends Command {
 
 		const users = message.guild.members.filter(member => member.user.presence.game && member.user.presence.game.streaming);
 		max = users.size;
+
+		if (users.size === 0) return message.channel.send('No one is streaming right now!');
+
 		users.forEach(mem => {
 			console.log(`${max} max`);
 			console.log(`${count} current`);
@@ -28,8 +31,13 @@ module.exports = class StreamingCommand extends Command {
 			snekfetch.get(url).then(res => {
 				text += `${mem.displayName} - ${res.body.stream.game} - <${res.body.stream.channel.url}>\n`;
 			});
+
 			count++;
-			if (count === max) message.channel.send(text);
+
+			if (count === max) {
+				message.channel.send(text);
+				console.log('is last');
+			}
 		});
 	}
 };
