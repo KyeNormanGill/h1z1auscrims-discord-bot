@@ -1,4 +1,4 @@
-const twitchKey = require('./../config.json').twitch;
+const { twitch } = require('../config.json');
 const snekfetch = require('snekfetch');
 const fs = require('fs');
 const path = require('path');
@@ -18,7 +18,7 @@ function handleEvent(o, n) {
 		timestamps[n.id].timestamp = start;
 		const streamID = n.user.presence.game.url.split('/').slice(3).join();
 
-		const url = `https://api.twitch.tv/kraken/streams/${streamID}?client_id=${twitchKey}`;
+		const url = `https://api.twitch.tv/kraken/streams/${streamID}?client_id=${twitch}`;
 		snekfetch.get(url).then(res => {
 			const status = res.body.stream.channel.status;
 			const wrapRegex = new RegExp(`.{1,${44}}`, 'g');
