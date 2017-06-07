@@ -36,3 +36,5 @@ client.on('guildMemberRemove', member => {
 		**${moment().format('h:mm a, Do MMMM YYYY')}**
 	`);
 });
+
+client.on('presenceUpdate', (oldM, newM) => require('./events/presenceUpdate.js').handleEvent(oldM, newM));
