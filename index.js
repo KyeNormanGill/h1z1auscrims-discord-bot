@@ -9,7 +9,6 @@ const client = new Smooth.Client({
 	prefix: '-',
 	commandDirectory: path.join(__dirname, 'commands'),
 	debug: true,
-	unkownCommandResponse: true,
 	errorResponse: true
 });
 
