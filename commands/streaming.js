@@ -23,8 +23,6 @@ module.exports = class StreamingCommand extends Command {
 		if (users.size === 0) return message.channel.send('No one is streaming right now!');
 
 		users.forEach(mem => {
-			console.log(`${max} max`);
-			console.log(`${count} current`);
 			const streamID = mem.user.presence.game.url.split('/').slice(3).join();
 			const url = `https://api.twitch.tv/kraken/streams/${streamID}?client_id=${twitch}`;
 			snekfetch.get(url).then(res => {
@@ -34,7 +32,6 @@ module.exports = class StreamingCommand extends Command {
 
 				if (count === max) {
 					message.channel.send(text);
-					console.log('is last');
 				}
 			});
 		});
