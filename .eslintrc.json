@@ -93,7 +93,6 @@
     "func-names": "error",
     "func-name-matching": "error",
     "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
-    "indent": ["error", "tab"],
     "key-spacing": "error",
     "keyword-spacing": "error",
     "max-depth": "error",

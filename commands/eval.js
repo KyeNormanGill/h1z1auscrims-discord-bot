@@ -5,7 +5,8 @@ module.exports = class EvalCommand extends Command {
 		super({
 			name: 'eval',
 			description: 'Evaluates code.',
-			guildOnly: false
+			guildOnly: false,
+			ownerOnly: true
 		});
 	}
 
