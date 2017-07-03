@@ -17,11 +17,11 @@ module.exports = class LockdownCommand extends Command {
 
             if (this._resolvePermissionNumber(everyone.permissions).includes('SEND_MESSAGES')) {
                 // Isn't locked down
-                everyone.setPermissisons(this._removeSendMessages(everyone.permissions));
+                everyone.setPermissions(this._removeSendMessages(everyone.permissions));
                 message.channel.send('Server is now locked. Only Administrators and Moderators can speak.');
             } else {
                 // Is locked down
-                everyone.setPermissisons(this._addSendMessages(everyone.permissions));
+                everyone.setPermissions(this._addSendMessages(everyone.permissions));
                 message.channel.send('Server is no longer locked. Everyone can speak.');
             }
         }
