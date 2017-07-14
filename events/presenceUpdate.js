@@ -20,39 +20,35 @@ function handleEvent(o, n) {
 
 		const url = `https://api.twitch.tv/kraken/streams/${streamID}?client_id=${twitch}`;
 		snekfetch.get(url).then(res => {
-			const status = res.body.stream.channel.status;
-			const wrapRegex = new RegExp(`.{1,${44}}`, 'g');
-			const lines = status.match(wrapRegex) || [];
-
-			const wrappedStatus = lines.reduce((tot, cur) =>
-				/\S$/.test(tot) && /^\S/.test(cur)
-				? `${tot}-\n${cur}`
-				: `${tot.trim()}\n${cur.trim()}`
-			);
-
-			const canvas = new Canvas(800, 200);
+			const canvas = new Canvas(550, 400);
 			const ctx = canvas.getContext('2d');
-			const Image = Canvas.Image;
-			const twitchLogo = new Image();
-			/* http://i.imgur.com/yht9Iz8m.png */
-			twitchLogo.src = path.join(__dirname, '..', 'data', 'images', 'twitch.png');
+			const { Image } = Canvas;
 
-			ctx.fillStyle = '#FFFFFF';
+			ctx.fillStyle = '#6441A4';
 			ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-			ctx.drawImage(twitchLogo, 0, 0, 200, 200);
+			ctx.fillStyle = '#ffffff';
+			ctx.fillRect(16.5, 16.5, 517, 293);
 
-			ctx.fillStyle = '#000000';
-			ctx.font = '27px Arial';
-			ctx.fillText(`${res.body.stream.channel.display_name}, is now live!`, 235, 50);
+			ctx.fillRect(16.5, 321, 517, 62.5);
 
-			ctx.font = '22px Arial';
-			ctx.fillText(wrappedStatus, 235, 80);
+			ctx.fillStyle = '#6441A4';
+			ctx.font = '26px Arial';
+			ctx.fillText(res.body.stream.channel.display_name, 30, 350);
 
-			ctx.fillStyle = '#565656';
-			ctx.fillText(`Playing: ${res.body.stream.game}`, 235, 180);
+			ctx.font = '16px Arial';
+			ctx.fillText(res.body.stream.game, 30, 375);
 
-			n.guild.channels.get('321907198592679948').send(`Go check them out! <${res.body.stream.channel.url}>`, { files: [{ attachment: canvas.toBuffer() }] });
+			ctx.font = '14px Arial';
+			ctx.fillText(res.body.stream.channel.status.replace(/(.{30})/g, "$1\n"), 270, 342);
+
+			snekfetch.get(res.body.stream.preview.large).then(imageRes => {
+				const image = new Image();
+				image.src = imageRes.body;
+				ctx.drawImage(image, 19, 19, 512, 288);
+
+				n.guild.channels.get('321907198592679948').send(`Go check them out! <${res.body.stream.channel.url}>`, { files: [{ attachment: canvas.toBuffer() }] });
+			});
 		});
 	}
 
