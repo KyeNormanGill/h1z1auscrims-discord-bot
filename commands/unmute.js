@@ -11,11 +11,12 @@ module.exports = class LockdownCommand extends Command {
 	}
 
 	run(message) {
-		if (!message.member.roles.has('322794011133870080') || !message.member.roles.has('292271962544275456')) return;
-		if (message.channel.id !== '334258750200217601' || message.channel.id !== '334258848523354122' || message.channel.id !== '324578223142993931') return message.chanel.send('Only the general chats and LFT chat can be unmuted.');
-		console.log('uwot');
-		message.channel.overwritePermissions(message.guild.roles.get(message.guild.id), { SEND_MESSAGES: null }).then(() => {
-			message.channel.send(`**${message.channel.name}** is now unmuted!`);
-		});
+		if (message.member.roles.has('322794011133870080') || message.member.roles.has('292271962544275456')) {
+			if (message.channel.id !== '334258750200217601' || message.channel.id !== '334258848523354122' || message.channel.id !== '324578223142993931') return message.chanel.send('Only the general chats and LFT chat can be unmuted.');
+
+			message.channel.overwritePermissions(message.guild.roles.get(message.guild.id), { SEND_MESSAGES: null }).then(() => {
+				message.channel.send(`**${message.channel.name}** is now unmuted!`);
+			});
+		}
 	}
 };
