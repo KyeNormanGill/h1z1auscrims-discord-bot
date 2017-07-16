@@ -21,7 +21,8 @@ client.on('ready', () => {
 client.on('message', message => {
 	if (triggerWords.some(word => message.content.toLowerCase().includes(word))) {
 		message.delete().then(() => {
-			message.reply('Please do not use racial slurs in discord. Your message has been deleted.');
+			message.member.addRole(message.guild.roles.get('329522736927866880'));
+			message.reply('Please do not use racial slurs in discord. Your message has been deleted and you are now muted.');
 		});
 	}
 });
