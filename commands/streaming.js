@@ -26,8 +26,7 @@ module.exports = class StreamingCommand extends Command {
 			const streamID = mem.user.presence.game.url.split('/').slice(3).join();
 			const url = `https://api.twitch.tv/kraken/streams/${streamID}?client_id=${twitch}`;
 			snekfetch.get(url).then(res => {
-				console.log(res.body);
-				//text += `**${mem.displayName}** - ${res.body.stream.game} - <${res.body.stream.channel.url}>\n`;
+				text += `**${mem.displayName}** - ${res.body.stream.game} - <${res.body.stream.channel.url}>\n`;
 			}).then(() => {
 				count++;
 
