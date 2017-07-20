@@ -20,6 +20,7 @@ function handleEvent(o, n) {
 
 		const url = `https://api.twitch.tv/kraken/streams/${streamID}?client_id=${twitch}`;
 		snekfetch.get(url).then(res => {
+			if (res.body.stream.game !== 'H1Z1: King of the Kill') return;
 			const canvas = new Canvas(550, 400);
 			const ctx = canvas.getContext('2d');
 			const { Image } = Canvas;
