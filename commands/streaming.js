@@ -13,11 +13,11 @@ module.exports = class StreamingCommand extends Command {
 	}
 
 	run(message, args) {
-		let text = `Users streaming in **${message.guild.name}**\n\n`;
+		let text = `Users streaming **H1Z1: KOTK** in **${message.guild.name}**\n\n`;
 		let count = 0;
 		let max = 0;
 
-		const users = message.guild.members.filter(member => member.user.presence.game && member.user.presence.game.streaming);
+		const users = message.guild.members.filter(member => member.user.presence.game && member.user.presence.game.streaming && member.user.presence.game.name === 'H1Z1: King of the Kill');
 		max = users.size;
 
 		if (users.size === 0) return message.channel.send('No one is streaming right now!');
@@ -27,7 +27,7 @@ module.exports = class StreamingCommand extends Command {
 			const url = `https://api.twitch.tv/kraken/streams/${streamID}?client_id=${twitch}`;
 			snekfetch.get(url).then(res => {
 				if (!res.body.stream) return;
-				text += `**${mem.displayName}** - ${res.body.stream.game} - <${res.body.stream.channel.url}>\n`;
+				text += `**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
 			}).then(() => {
 				count++;
 
