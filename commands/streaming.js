@@ -17,16 +17,18 @@ module.exports = class StreamingCommand extends Command {
 		let count = 0;
 		let max = 0;
 
-		const users = message.guild.members.filter(member => member.user.presence.game && member.user.presence.game.streaming && member.user.presence.game.name === 'H1Z1: King of the Kill');
+		const users = message.guild.members.filter(member => member.user.presence.game && member.user.presence.game.streaming);
 		max = users.size;
 
-		if (users.size === 0) return message.channel.send('No one is streaming right now!');
+		if (users.size === 0) return message.channel.send('No one is streaming H1Z1 right now!');
 
 		users.forEach(mem => {
 			const streamID = mem.user.presence.game.url.split('/').slice(3).join();
 			const url = `https://api.twitch.tv/kraken/streams/${streamID}?client_id=${twitch}`;
 			snekfetch.get(url).then(res => {
 				if (!res.body.stream) return;
+				if (res.body.stream.game !== 'H1Z1: King of the Kill');
+
 				text += `**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
 			}).then(() => {
 				count++;
