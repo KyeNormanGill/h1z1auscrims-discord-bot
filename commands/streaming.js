@@ -36,7 +36,10 @@ module.exports = class StreamingCommand extends Command {
 				count++;
 
 				if (count === max) {
-					if (names.length > 1) text += `\nWatch them all at: http://multitwitch.tv/${names.map(i => `${i}/`).join('')}`;
+					if (names.length > 1) {
+						snekfetch.get(`http://tinyurl.com/api-create.php?url=http://multitwitch.tv/${names.map(i => `${i}/`).join('')}`)
+							.then(res => text += `\nWatch them all at: ${res.text}`);
+					}
 					message.channel.send(text);
 				}
 			});
