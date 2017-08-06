@@ -16,7 +16,7 @@ module.exports = class StreamingCommand extends Command {
 		let text = `Users streaming **H1Z1: KOTK** in **${message.guild.name}**\n\n`;
 		let count = 0;
 		let max = 0;
-		const names = '';
+		let names = '';
 
 		const users = message.guild.members.filter(member => member.user.presence.game && member.user.presence.game.streaming);
 		max = users.size;
