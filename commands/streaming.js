@@ -27,7 +27,7 @@ module.exports = class StreamingCommand extends Command {
 			const url = `https://api.twitch.tv/kraken/streams/${streamID}?client_id=${twitch}`;
 			snekfetch.get(url).then(res => {
 				if (!res.body.stream) return;
-				if (res.body.stream.game !== 'H1Z1: King of the Kill');
+				if (res.body.stream.game !== 'H1Z1: King of the Kill') return;
 
 				text += `**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
 			}).then(() => {
