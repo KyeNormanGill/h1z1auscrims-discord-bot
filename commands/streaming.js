@@ -16,6 +16,7 @@ module.exports = class StreamingCommand extends Command {
 		let text = `Users streaming **H1Z1: KOTK** in **${message.guild.name}**\n\n`;
 		let count = 0;
 		let max = 0;
+		const names = [];
 
 		const users = message.guild.members.filter(member => member.user.presence.game && member.user.presence.game.streaming);
 		max = users.size;
@@ -28,12 +29,14 @@ module.exports = class StreamingCommand extends Command {
 			snekfetch.get(url).then(res => {
 				if (!res.body.stream) return;
 				if (res.body.stream.game !== 'H1Z1: King of the Kill') return;
+				names.push(streamID);
 
 				text += `**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
 			}).then(() => {
 				count++;
 
 				if (count === max) {
+					if (names.length > 1) text += `\nWatch them all at: http://multitwitch.tv/${names.map(i => `${i}/`).join('')}`;
 					message.channel.send(text);
 				}
 			});
