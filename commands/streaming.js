@@ -42,8 +42,8 @@ module.exports = class StreamingCommand extends Command {
 							.then(res => {
 								text += `\nWatch them all at: ${res.text}`;
 								console.log(res.text);
+								message.channel.send(text);
 							});
-						message.channel.send(text);
 					} else {
 						message.channel.send(text);
 					}
