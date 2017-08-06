@@ -39,9 +39,11 @@ module.exports = class StreamingCommand extends Command {
 					if (names.length > 1) {
 						console.log('getting')
 						snekfetch.get(`http://tinyurl.com/api-create.php?url=http://multitwitch.tv/${names.map(i => `${i}/`).join('')}`)
-							.then(res => text += `\nWatch them all at: ${res.text}`);
+							.then(res => text += `\nWatch them all at: ${res.text}`);	
+						message.channel.send(text);
+					} else {
+						message.channel.send(text);
 					}
-					message.channel.send(text);
 				}
 			});
 		});
