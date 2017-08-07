@@ -30,5 +30,6 @@ client.on('message', message => {
 });
 
 client.on('presenceUpdate', (oldM, newM) => require('./events/presenceUpdate.js').handleEvent(oldM, newM));
+client.on('presenceUpdate', (oldM, newM) => require('./events/oldpresenceUpdate.js').handleEvent(oldM, newM));
 
 process.on('unhandledRejection', console.error);
