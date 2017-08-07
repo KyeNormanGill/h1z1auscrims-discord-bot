@@ -76,7 +76,7 @@ function updateStreaming(client) {
 					}
 					console.log(`Updating live: ${new Date()}`);
 
-					message.edit(`${div1}\n${div1MultiLink ? `Watch them all at: ${div1MultiLink}` : ''}\n\n${div2}\n${div2MultiLink ? `Watch them all at: ${div2MultiLink}` : ''}`).catch(console.error);
+					message.edit(`${div1}\n${div1MultiLink ? `*Multilink ${div1MultiLink}*` : ''}\n\n${div2}\n${div2MultiLink ? `*Multilink ${div2MultiLink}*` : ''}`).catch(console.error);
 				});
 			});
 		});
