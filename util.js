@@ -27,10 +27,10 @@ async function updateStreaming(client) {
 	channel.fetchMessage('343991659261984770').then(m => message = m);
 
 	let div1 = '__No one streaming in **Division 1**__\n\n';
-	let div1Multi = [];
+	const div1Multi = [];
 	let div1MultiLink;
 	let div2 = '__No one streaming in **Division 2**__';
-	let div2Multi = [];
+	const div2Multi = [];
 	let div2MultiLink;
 	let other = '__No one streaming in **Other**__';
 
@@ -66,20 +66,19 @@ async function updateStreaming(client) {
 					other = `__**Other streamers**__\n\n**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
 				}
 			}
-
-			if (div1Multi.length > 1) {
-				div1MultiLink = await snekfetch.get(`http://tinyurl.com/api-create.php?url=http://multitwitch.tv/${div1Multi.join('/')}`).text;
-			}
-
-			if (div2Multi.length > 1) {
-				div2MultiLink = await snekfetch.get(`http://tinyurl.com/api-create.php?url=http://multitwitch.tv/${div1Multi.join('/')}`).text;
-			}
-
-			console.log(`Updating live: ${new Date()}`)
-
-			message.edit(`${div1}\n${div1MultiLink}\n\n${div2}\n${div2MultiLink}\n\n${other}`).catch(console.error);
 		});
 	});
+	if (div1Multi.length > 1) {
+		div1MultiLink = await snekfetch.get(`http://tinyurl.com/api-create.php?url=http://multitwitch.tv/${div1Multi.join('/')}`).text;
+	}
+
+	if (div2Multi.length > 1) {
+		div2MultiLink = await snekfetch.get(`http://tinyurl.com/api-create.php?url=http://multitwitch.tv/${div1Multi.join('/')}`).text;
+	}
+
+	console.log(`Updating live: ${new Date()}`);
+
+	message.edit(`${div1}\n${div1MultiLink}\n\n${div2}\n${div2MultiLink}\n\n${other}`).catch(console.error);
 }
 
 exports.findUser = findUser;
