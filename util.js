@@ -26,7 +26,7 @@ function updateStreaming(client) {
 	let message;
 	channel.fetchMessage('343991659261984770').then(m => {
 		message = m;
-	
+
 		let div1 = '__No one streaming in **Division 1**__\n\n';
 		const div1Multi = [];
 		let div1MultiLink;
@@ -46,7 +46,6 @@ function updateStreaming(client) {
 				if (res.body.stream.game !== 'H1Z1: King of the Kill') return;
 
 				if (mem.roles.has(div1RoleId)) {
-					console.log(`${mem.user.username} is streaming in div 1`);
 					div1Multi.push(streamID);
 					if (div1.startsWith('__**Division 1 streamers**__')) {
 						div1 += `**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
@@ -55,7 +54,6 @@ function updateStreaming(client) {
 					}
 				} else
 				if (mem.roles.has(div2RoleId)) {
-					console.log(`${mem.user.username} is streaming in div 2`);
 					div2Multi.push(streamID);
 					if (div2.startsWith('__**Division 2 streamers**__')) {
 						div2 += `**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
@@ -63,7 +61,6 @@ function updateStreaming(client) {
 						div2 = `__**Division 2 streamers**__\n\n**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
 					}
 				} else {
-					console.log(`${mem.user.username} is streaming in other`);
 					if (other.startsWith('__**Other streamers**__')) {
 						other += `**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
 					} else {
@@ -73,7 +70,6 @@ function updateStreaming(client) {
 			});
 		});
 
-		console.log(div1);
 		snekfetch.get(`http://tinyurl.com/api-create.php?url=http://multitwitch.tv/${div1Multi.join('/')}`).then(res => {
 			snekfetch.get(`http://tinyurl.com/api-create.php?url=http://multitwitch.tv/${div2Multi.join('/')}`).then(res2 => {
 				if (div1Multi.length > 1) {
