@@ -33,7 +33,6 @@ function updateStreaming(client) {
 		let div2 = '__No one streaming in **Division 2**__';
 		const div2Multi = [];
 		let div2MultiLink = '';
-		let other = '__No one streaming in **Other**__';
 
 		const streaming = channel.guild.members.filter(member => member.user.presence.game && member.user.presence.game.streaming);
 
@@ -60,12 +59,6 @@ function updateStreaming(client) {
 					} else {
 						div2 = `__**Division 2 streamers**__\n\n**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
 					}
-				} else {
-					if (other.startsWith('__**Other streamers**__')) {
-						other += `**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
-					} else {
-						other = `__**Other streamers**__\n\n**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
-					}
 				}
 			});
 		});
@@ -80,7 +73,7 @@ function updateStreaming(client) {
 				}
 				console.log(`Updating live: ${new Date()}`);
 
-				message.edit(`${div1}\n${div1MultiLink ? `Watch them all at: ${div1MultiLink}` : ''}\n\n${div2}\n${div2MultiLink ? `Watch them all at: ${div2MultiLink}` : ''}\n\n${other}`).catch(console.error);
+				message.edit(`${div1}\n${div1MultiLink ? `Watch them all at: ${div1MultiLink}` : ''}\n\n${div2}\n${div2MultiLink ? `Watch them all at: ${div2MultiLink}` : ''}`).catch(console.error);
 			});
 		});
 	});
