@@ -19,72 +19,75 @@ function error(errorText, message) {
 	message.channel.send({ embed });
 }
 
-async function updateStreaming(client) {
+function updateStreaming(client) {
 	const channel = client.guilds.get('163508085497790467').channels.get('343979578089406474');
 	const div1RoleId = '329312590390099971';
 	const div2RoleId = '329312398198702080';
-	const message = await channel.fetchMessage('343991659261984770');
+	let message;
+	channel.fetchMessage('343991659261984770').then(m => {
+		message = m;
+	
+		let div1 = '__No one streaming in **Division 1**__\n\n';
+		const div1Multi = [];
+		let div1MultiLink;
+		let div2 = '__No one streaming in **Division 2**__';
+		const div2Multi = [];
+		let div2MultiLink;
+		let other = '__No one streaming in **Other**__';
 
-	let div1 = '__No one streaming in **Division 1**__\n\n';
-	const div1Multi = [];
-	let div1MultiLink;
-	let div2 = '__No one streaming in **Division 2**__';
-	const div2Multi = [];
-	let div2MultiLink;
-	let other = '__No one streaming in **Other**__';
+		const streaming = channel.guild.members.filter(member => member.user.presence.game && member.user.presence.game.streaming);
 
-	const streaming = channel.guild.members.filter(member => member.user.presence.game && member.user.presence.game.streaming);
+		streaming.forEach(mem => {	
+			const streamID = mem.user.presence.game.url.split('/').slice(3).join();
+			const url = `https://api.twitch.tv/kraken/streams/${streamID}?client_id=${twitch}`;
 
-	streaming.forEach(mem => {	
-		const streamID = mem.user.presence.game.url.split('/').slice(3).join();
-		const url = `https://api.twitch.tv/kraken/streams/${streamID}?client_id=${twitch}`;
+			snekfetch.get(url).then(res => {
+				if (!res.body.stream) return;
+				if (res.body.stream.game !== 'H1Z1: King of the Kill') return;
 
-		snekfetch.get(url).then(res => {
-			if (!res.body.stream) return;
-			if (res.body.stream.game !== 'H1Z1: King of the Kill') return;
-
-			if (mem.roles.has(div1RoleId)) {
-				console.log(`${mem.user.username} is streaming in div 1`);
-				div1Multi.push(streamID);
-				if (div1.startsWith('__**Division 1 streamers**__')) {
-					div1 += `**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
+				if (mem.roles.has(div1RoleId)) {
+					console.log(`${mem.user.username} is streaming in div 1`);
+					div1Multi.push(streamID);
+					if (div1.startsWith('__**Division 1 streamers**__')) {
+						div1 += `**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
+					} else {
+						div1 = `__**Division 1 streamers**__\n\n**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
+					}
+				} else
+				if (mem.roles.has(div2RoleId)) {
+					console.log(`${mem.user.username} is streaming in div 2`);
+					div2Multi.push(streamID);
+					if (div2.startsWith('__**Division 2 streamers**__')) {
+						div2 += `**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
+					} else {
+						div2 = `__**Division 2 streamers**__\n\n**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
+					}
 				} else {
-					div1 = `__**Division 1 streamers**__\n\n**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
+					console.log(`${mem.user.username} is streaming in other`);
+					if (other.startsWith('__**Other streamers**__')) {
+						other += `**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
+					} else {
+						other = `__**Other streamers**__\n\n**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
+					}
 				}
-			} else
-			if (mem.roles.has(div2RoleId)) {
-				console.log(`${mem.user.username} is streaming in div 2`);
-				div2Multi.push(streamID);
-				if (div2.startsWith('__**Division 2 streamers**__')) {
-					div2 += `**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
-				} else {
-					div2 = `__**Division 2 streamers**__\n\n**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
+			});
+		});
+
+		console.log(div1);
+		snekfetch.get(`http://tinyurl.com/api-create.php?url=http://multitwitch.tv/${div1Multi.join('/')}`).then(res => {
+			snekfetch.get(`http://tinyurl.com/api-create.php?url=http://multitwitch.tv/${div2Multi.join('/')}`).then(res2 => {
+				if (div1Multi.length > 1) {
+					div1MultiLink = res.text;
 				}
-			} else {
-				console.log(`${mem.user.username} is streaming in other`);
-				if (other.startsWith('__**Other streamers**__')) {
-					other += `**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
-				} else {
-					other = `__**Other streamers**__\n\n**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
+				if (div2Multi.length > 1) {
+					div1MultiLink = res2.text;
 				}
-			}
+				console.log(`Updating live: ${new Date()}`);
+
+				message.edit(`${div1}\n${div1MultiLink}\n\n${div2}\n${div2MultiLink}\n\n${other}`).catch(console.error);
+			});
 		});
 	});
-
-	console.log(div1);
-
-	if (div1Multi.length > 1) {
-		div1MultiLink = await snekfetch.get(`http://tinyurl.com/api-create.php?url=http://multitwitch.tv/${div1Multi.join('/')}`);
-		console.log(div1MultiLink);
-	}
-
-	if (div2Multi.length > 1) {
-		div2MultiLink = await snekfetch.get(`http://tinyurl.com/api-create.php?url=http://multitwitch.tv/${div2Multi.join('/')}`).text;
-	}
-
-	console.log(`Updating live: ${new Date()}`);
-
-	message.edit(`${div1}\n${div1MultiLink}\n\n${div2}\n${div2MultiLink}\n\n${other}`).catch(console.error);
 }
 
 exports.findUser = findUser;
