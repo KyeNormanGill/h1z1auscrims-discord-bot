@@ -71,6 +71,8 @@ async function updateStreaming(client) {
 		});
 	});
 
+	console.log(div1);
+
 	if (div1Multi.length > 1) {
 		div1MultiLink = await snekfetch.get(`http://tinyurl.com/api-create.php?url=http://multitwitch.tv/${div1Multi.join('/')}`);
 		console.log(div1MultiLink);
@@ -80,7 +82,6 @@ async function updateStreaming(client) {
 		div2MultiLink = await snekfetch.get(`http://tinyurl.com/api-create.php?url=http://multitwitch.tv/${div2Multi.join('/')}`).text;
 	}
 
-	console.log(div1Multi);
 	console.log(`Updating live: ${new Date()}`);
 
 	message.edit(`${div1}\n${div1MultiLink}\n\n${div2}\n${div2MultiLink}\n\n${other}`).catch(console.error);
