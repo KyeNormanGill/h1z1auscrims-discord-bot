@@ -68,6 +68,10 @@ async function updateStreaming(client) {
 			}
 		});
 	});
+
+	console.log(div1Multi);
+	console.log(div2Multi);
+
 	if (div1Multi.length > 1) {
 		div1MultiLink = await snekfetch.get(`http://tinyurl.com/api-create.php?url=http://multitwitch.tv/${div1Multi.join('/')}`).text;
 		console.log(div1MultiLink);
