@@ -1,14 +1,14 @@
 const { updateStreaming } = require('../util.js');
 
-function handleEvent(old, new) {
-	if (old.presence.game && !old.presence.game.streaming) {
-		if (new.presence.game && new.presence.game.streaming) {
-			updateStreaming(new.client);
+function handleEvent(oldM, newM) {
+	if (oldM.presence.game && !oldM.presence.game.streaming) {
+		if (newM.presence.game && newM.presence.game.streaming) {
+			updateStreaming(newM.client);
 		}
 	} else
-	if (old.presence.game && old.presence.game.streaming) {
-		if (new.presence.game && !new.presence.game.streaming) {
-			updateStreaming(new.client);
+	if (oldM.presence.game && oldM.presence.game.streaming) {
+		if (newM.presence.game && !newM.presence.game.streaming) {
+			updateStreaming(newM.client);
 		}
 	}
 }
