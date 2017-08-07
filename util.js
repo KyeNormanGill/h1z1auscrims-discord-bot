@@ -45,20 +45,20 @@ async function updateStreaming(client) {
 			if (res.body.stream.game !== 'H1Z1: King of the Kill') return;
 
 			if (mem.roles.has(div1RoleId)) {
+				div1Multi.push(streamID);
 				if (div1.startsWith('__**Division 1 streamers**__')) {
 					div1 += `**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
 				} else {
 					div1 = `__**Division 1 streamers**__\n\n**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
 				}
-				div1Multi.push(streamID);
 			} else
 			if (mem.roles.has(div2RoleId)) {
+				div2Multi.push(streamID);
 				if (div2.startsWith('__**Division 2 streamers**__')) {
 					div2 += `**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
 				} else {
 					div2 = `__**Division 2 streamers**__\n\n**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
 				}
-				div2Multi.push(streamID);
 			} else {
 				if (other.startsWith('__**Other streamers**__')) {
 					other += `**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
