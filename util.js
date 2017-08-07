@@ -63,7 +63,7 @@ function updateStreaming(client) {
 				}
 			}
 
-			message.edit(`${div1}${div2}${other}`).catch(console.error);
+			message.edit(`${div1}\n\n${div2}\n\n${other}`).catch(console.error);
 		});
 
 
