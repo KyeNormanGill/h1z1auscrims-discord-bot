@@ -19,7 +19,7 @@ function error(errorText, message) {
 	message.channel.send({ embed });
 }
 
-function updateStreaming(client) {
+async function updateStreaming(client) {
 	const channel = client.guilds.get('163508085497790467').channels.get('343979578089406474');
 	const div1RoleId = '329312590390099971';
 	const div2RoleId = '329312398198702080';
@@ -27,9 +27,11 @@ function updateStreaming(client) {
 	channel.fetchMessage('343991659261984770').then(m => message = m);
 
 	let div1 = '__No one streaming in **Division 1**__\n\n';
-	let div1Multi = '';
+	let div1Multi = [];
+	let div1MultiLink;
 	let div2 = '__No one streaming in **Division 2**__';
-	let div2Multi = '';
+	let div2Multi = [];
+	let div2MultiLink;
 	let other = '__No one streaming in **Other**__';
 
 	const streaming = channel.guild.members.filter(member => member.user.presence.game && member.user.presence.game.streaming);
@@ -48,6 +50,7 @@ function updateStreaming(client) {
 				} else {
 					div1 = `__**Division 1 streamers**__\n\n**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
 				}
+				div1Multi.push(streamID);
 			} else
 			if (mem.roles.has(div2RoleId)) {
 				if (div2.startsWith('__**Division 2 streamers**__')) {
@@ -55,6 +58,7 @@ function updateStreaming(client) {
 				} else {
 					div2 = `__**Division 2 streamers**__\n\n**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
 				}
+				div2Multi.push(streamID);
 			} else {
 				if (other.startsWith('__**Other streamers**__')) {
 					other += `**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
@@ -63,10 +67,18 @@ function updateStreaming(client) {
 				}
 			}
 
-			message.edit(`${div1}\n\n${div2}\n\n${other}`).catch(console.error);
+			if (div1Multi.length > 1) {
+				div1MultiLink = await snekfetch.get(`http://tinyurl.com/api-create.php?url=http://multitwitch.tv/${div1Multi.join('/')}`).text;
+			}
+
+			if (div2Multi.length > 1) {
+				div2MultiLink = await snekfetch.get(`http://tinyurl.com/api-create.php?url=http://multitwitch.tv/${div1Multi.join('/')}`).text;
+			}
+
+			console.log(`Updating live: ${new Date()}`)
+
+			message.edit(`${div1}\n${div1MultiLink}\n\n${div2}\n${div2MultiLink}\n\n${other}`).catch(console.error);
 		});
-
-
 	});
 }
 
