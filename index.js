@@ -15,9 +15,9 @@ const triggerWords = ['nigger', 'nigga', 'negro'];
 
 client.login(token);
 
-client.once('ready', () => {
+client.once('ready', async() => {
 	client.user.setGame('5s with the boys!');
-	util.updateStreaming(client);
+	await util.updateStreaming(client);
 });
 
 client.on('message', message => {
