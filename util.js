@@ -23,7 +23,7 @@ async function updateStreaming(client) {
 	const channel = client.guilds.get('163508085497790467').channels.get('343979578089406474');
 	const div1RoleId = '329312590390099971';
 	const div2RoleId = '329312398198702080';
-	const message = await	channel.fetchMessage('343991659261984770');
+	const message = await channel.fetchMessage('343991659261984770');
 
 	let div1 = '__No one streaming in **Division 1**__\n\n';
 	const div1Multi = [];
@@ -44,6 +44,7 @@ async function updateStreaming(client) {
 			if (res.body.stream.game !== 'H1Z1: King of the Kill') return;
 
 			if (mem.roles.has(div1RoleId)) {
+				console.log(`${mem.user.username} is streaming in div 1`);
 				div1Multi.push(streamID);
 				if (div1.startsWith('__**Division 1 streamers**__')) {
 					div1 += `**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
@@ -52,6 +53,7 @@ async function updateStreaming(client) {
 				}
 			} else
 			if (mem.roles.has(div2RoleId)) {
+				console.log(`${mem.user.username} is streaming in div 2`);
 				div2Multi.push(streamID);
 				if (div2.startsWith('__**Division 2 streamers**__')) {
 					div2 += `**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
@@ -59,6 +61,7 @@ async function updateStreaming(client) {
 					div2 = `__**Division 2 streamers**__\n\n**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
 				}
 			} else {
+				console.log(`${mem.user.username} is streaming in other`);
 				if (other.startsWith('__**Other streamers**__')) {
 					other += `**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
 				} else {
