@@ -32,7 +32,7 @@ function updateStreaming(client) {
 	let div2Multi = '';
 	let other = '__No one streaming in **Other**__';
 
-	const streaming = message.guild.members.filter(member => member.user.presence.game && member.user.presence.game.streaming);
+	const streaming = new.guild.members.filter(member => member.user.presence.game && member.user.presence.game.streaming);
 
 	streaming.forEach(mem => {	
 		const streamID = mem.user.presence.game.url.split('/').slice(3).join();
