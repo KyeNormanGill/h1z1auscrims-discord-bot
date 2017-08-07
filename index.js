@@ -1,8 +1,9 @@
-const Smooth = require('smooth-discord.js');
+const Client = require('./struct/client.js');
 const path = require('path');
 const { token } = require('./config.json');
+const util = require('./util.js');
 
-const client = new Smooth.Client({
+const client = new Client({
 	owners: ['189696688657530880'],
 	prefix: '-',
 	commandDirectory: path.join(__dirname, 'commands'),
@@ -14,8 +15,9 @@ const triggerWords = ['nigger', 'nigga', 'negro'];
 
 client.login(token);
 
-client.on('ready', () => {
+client.once('ready', () => {
 	client.user.setGame('5s with the boys!');
+	util.updateStreaming(client);
 });
 
 client.on('message', message => {
