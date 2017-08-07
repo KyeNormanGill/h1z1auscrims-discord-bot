@@ -23,8 +23,7 @@ async function updateStreaming(client) {
 	const channel = client.guilds.get('163508085497790467').channels.get('343979578089406474');
 	const div1RoleId = '329312590390099971';
 	const div2RoleId = '329312398198702080';
-	let message;
-	channel.fetchMessage('343991659261984770').then(m => message = m);
+	const message = await	channel.fetchMessage('343991659261984770');
 
 	let div1 = '__No one streaming in **Division 1**__\n\n';
 	const div1Multi = [];
