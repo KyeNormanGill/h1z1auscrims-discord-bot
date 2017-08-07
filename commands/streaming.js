@@ -37,6 +37,7 @@ module.exports = class StreamingCommand extends Command {
 
 				if (count === max) {
 					if (names.length > 1) {
+						console.log(`${names.length} is greater than 1`)
 						snekfetch.get(`http://tinyurl.com/api-create.php?url=http://multitwitch.tv/${names}`)
 							.then(res => {
 								text += `\nWatch them all at: ${res.text}`;
