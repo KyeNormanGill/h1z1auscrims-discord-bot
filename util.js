@@ -32,7 +32,7 @@ function updateStreaming(client) {
 		let div1MultiLink;
 		let div2 = '__No one streaming in **Division 2**__';
 		const div2Multi = [];
-		let div2MultiLink;
+		let div2MultiLink = '';
 		let other = '__No one streaming in **Other**__';
 
 		const streaming = channel.guild.members.filter(member => member.user.presence.game && member.user.presence.game.streaming);
@@ -80,11 +80,11 @@ function updateStreaming(client) {
 					div1MultiLink = res.text;
 				}
 				if (div2Multi.length > 1) {
-					div1MultiLink = res2.text;
+					div2MultiLink = res2.text;
 				}
 				console.log(`Updating live: ${new Date()}`);
 
-				message.edit(`${div1}\n${div1MultiLink}\n\n${div2}\n${div2MultiLink}\n\n${other}`).catch(console.error);
+				message.edit(`${div1}\n${div1MultiLink ? `Watch them all at: ${div1MultiLink}` : ''}\n\n${div2}\n${div2MultiLink ? `Watch them all at: ${div2MultiLink}` : ''}\n\n${other}`).catch(console.error);
 			});
 		});
 	});
