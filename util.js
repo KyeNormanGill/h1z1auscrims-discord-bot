@@ -46,7 +46,6 @@ async function updateStreaming(client) {
 
 			if (mem.roles.has(div1RoleId)) {
 				div1Multi.push(streamID);
-				console.log(div1Multi);
 				if (div1.startsWith('__**Division 1 streamers**__')) {
 					div1 += `**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
 				} else {
@@ -70,9 +69,6 @@ async function updateStreaming(client) {
 		});
 	});
 
-	console.log(div1Multi);
-	console.log(div2Multi);
-
 	if (div1Multi.length > 1) {
 		div1MultiLink = await snekfetch.get(`http://tinyurl.com/api-create.php?url=http://multitwitch.tv/${div1Multi.join('/')}`);
 		console.log(div1MultiLink);
@@ -82,6 +78,7 @@ async function updateStreaming(client) {
 		div2MultiLink = await snekfetch.get(`http://tinyurl.com/api-create.php?url=http://multitwitch.tv/${div2Multi.join('/')}`).text;
 	}
 
+	console.log(div1Multi);
 	console.log(`Updating live: ${new Date()}`);
 
 	message.edit(`${div1}\n${div1MultiLink}\n\n${div2}\n${div2MultiLink}\n\n${other}`).catch(console.error);
