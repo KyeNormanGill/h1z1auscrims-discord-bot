@@ -67,9 +67,11 @@ function updateStreaming(client) {
 			snekfetch.get(`http://tinyurl.com/api-create.php?url=http://multitwitch.tv/${div2Multi.join('/')}`).then(res2 => {
 				if (div1Multi.length > 1) {
 					div1MultiLink = res.text;
+					console.log(div1MultiLink);
 				}
 				if (div2Multi.length > 1) {
 					div2MultiLink = res2.text;
+					console.log(div2MultiLink);
 				}
 				console.log(`Updating live: ${new Date()}`);
 
