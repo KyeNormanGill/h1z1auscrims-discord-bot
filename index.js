@@ -17,7 +17,7 @@ client.login(token);
 
 client.once('ready', () => {
 	client.user.setGame('5s with the boys!');
-	util.updateStreaming(client);
+	setInterval(util.updateStreaming(client), 300000);
 });
 
 client.on('message', message => {
@@ -28,7 +28,5 @@ client.on('message', message => {
 		});
 	}
 });
-
-client.on('presenceUpdate', (oldM, newM) => require('./events/presenceUpdate.js').handleEvent(oldM, newM));
 
 process.on('unhandledRejection', console.error);
