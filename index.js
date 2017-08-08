@@ -17,6 +17,7 @@ client.login(token);
 
 client.once('ready', () => {
 	client.user.setGame('5s with the boys!');
+	util.updateStreaming(client)
 	setInterval(() => util.updateStreaming(client), 300000);
 });
 
