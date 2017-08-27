@@ -1,6 +1,4 @@
 const { Command } = require('smooth-discord.js');
-const snekfetch = require('snekfetch');
-const { twitch } = require('../config.json');
 
 module.exports = class StreamingCommand extends Command {
 	constructor() {
@@ -12,7 +10,7 @@ module.exports = class StreamingCommand extends Command {
 		});
 	}
 
-	run(message, args) {
+	run(message) {
 		message.channel.send(`Check out: ${message.guild.channels.get('343979578089406474')}`);
 	}
 };
