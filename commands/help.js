@@ -16,7 +16,7 @@ module.exports = class HelpCommand extends Command {
 	}
 
 	async run(message, args) {
-		if (!args) return error('Please specify what you want help with');
+		if (!args) return error('Please specify what you want help with', message);
 
 		message.reply(`**${message.author.username}**, your help request has been added to queue, a moderator will get to it as soon as possible. You will be notified when it's complete!`);
 
@@ -25,7 +25,7 @@ module.exports = class HelpCommand extends Command {
 
 		const logMessage = await message.guild.channels.get('351269513737666560').send({ embed });
 
-		const item = await requests.create({ messageId: logMessage.id, Complete: false, userId: message.author.id });
+		const item = await requests.create({ messageId: logMessage.id, content: args, userId: message.author.id });
 
 		embed.setDescription(stripIndents`
 			**User**: ${message.author.username}
@@ -34,6 +34,6 @@ module.exports = class HelpCommand extends Command {
 			Moderators use \`-done ${item.id}\` to complete this task.
 		`);
 
-		await logMessage.edit(`${message.guild.roles.get(322794011133870080)}`, { embed });
+		await logMessage.edit(`${message.guild.roles.get('322794011133870080')}`, { embed });
 	}
 };
