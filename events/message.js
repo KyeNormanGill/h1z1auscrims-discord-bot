@@ -10,10 +10,10 @@ async function handle(message) {
 		const embed = new RichEmbed()
 			.setColor(0xf93535)
 			.setDescription(`
-				**Action**: Permanent Mute
-				**User**: ${message.author.username}
-				**Reason**: Racial slurs
-				**Message Content**: ${message.content}
+			**Action**: Permanent Mute
+			**User**: ${message.author.username}
+			**Reason**: Racial slurs
+			**Message Content**: ${message.content}
 			`);
 
 		await message.guild.channels.get('351251057407557634').send({ embed });
