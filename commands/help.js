@@ -23,7 +23,7 @@ module.exports = class HelpCommand extends Command {
 		const embed = new RichEmbed()
 			.setColor(0xe15a2c);
 
-		const logMessage = await message.guild.channels.get('351269513737666560').send({ embed });
+		const logMessage = await message.guild.channels.get('351269513737666560').send(`${message.guild.roles.get('322794011133870080')}`, { embed });
 
 		const item = await requests.create({ messageId: logMessage.id, content: args, userId: message.author.id });
 
@@ -34,6 +34,6 @@ module.exports = class HelpCommand extends Command {
 			Moderators use \`-done ${item.id}\` to complete this task.
 		`);
 
-		await logMessage.edit(`${message.guild.roles.get('322794011133870080')}`, { embed });
+		await logMessage.edit({ embed });
 	}
 };
