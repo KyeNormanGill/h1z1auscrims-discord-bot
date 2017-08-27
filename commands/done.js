@@ -1,5 +1,4 @@
 const { Command } = require('smooth-discord.js');
-const { RichEmbed } = require('discord.js');
 const { stripIndents } = require('common-tags');
 const { error } = require('../util.js');
 const requests = require('../models/request.js');
@@ -27,6 +26,6 @@ module.exports = class DoneCommand extends Command {
 		const logMessage = await message.guild.channels.get('351269513737666560').fetchMessage(request.messageId);
 		await logMessage.delete().catch(console.log);
 		await message.delete();
-		await message.reply(`Completed task: ${request.userId}`);
+		await message.reply(`Completed task: ${request.id}`);
 	}
 };
