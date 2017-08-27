@@ -9,8 +9,7 @@ module.exports = class DoneCommand extends Command {
 			name: 'done',
 			description: 'Doesn\'t matter anyway',
 			guildOnly: true,
-			aliases: ['complete'],
-			ownerOnly: true
+			aliases: ['complete']
 		});
 	}
 
