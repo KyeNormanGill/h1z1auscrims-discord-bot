@@ -25,5 +25,6 @@ module.exports = class DoneCommand extends Command {
 		`);
 
 		await message.guild.channels.get(request.messageId).delete().catch(console.log);
+		await message.delete();
 	}
 };
