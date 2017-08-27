@@ -11,9 +11,8 @@ async function handle(message) {
 		const embed = new RichEmbed()
 			.setColor(0xf93535)
 			.setDescription(stripIndents`
-				**Action**: Permanent Mute
 				**User**: ${message.author.username}
-				**Reason**: Racial slurs
+				**Action**: Mute because racial slurs
 				**Message Content**: ${message.content}
 			`);
 
