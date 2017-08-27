@@ -10,8 +10,7 @@ module.exports = class HelpCommand extends Command {
 			name: 'help',
 			description: 'Doesn\'t matter anyway',
 			guildOnly: true,
-			aliases: ['request'],
-			ownerOnly: true
+			aliases: ['request']
 		});
 	}
 
@@ -23,7 +22,7 @@ module.exports = class HelpCommand extends Command {
 		const embed = new RichEmbed()
 			.setColor(0xe15a2c);
 
-		const logMessage = await message.guild.channels.get('351269513737666560').send(`${message.guild.roles.get('322794011133870080')}`, { embed });
+		const logMessage = await message.guild.channels.get('351269513737666560').send({ embed });
 
 		const item = await requests.create({ messageId: logMessage.id, content: args, userId: message.author.id });
 

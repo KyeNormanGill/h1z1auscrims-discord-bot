@@ -15,6 +15,8 @@ module.exports = class DoneCommand extends Command {
 	}
 
 	async run(message, args) {
+		if (!message.member.roles.has('322794011133870080')) return error('Only moderators can use this!', message);
+
 		const request = await requests.findOne({ where: { id: args } });
 		if (!request) return error(`No request found with id ${args}`, message);
 
