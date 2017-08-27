@@ -24,7 +24,9 @@ module.exports = class DoneCommand extends Command {
 			\`\`\`${request.content}\`\`\`
 		`);
 
-		await message.guild.channels.get('351269513737666560').fetchMessage(request.messageId).delete().catch(console.log);
+		const logMessage = await message.guild.channels.get('351269513737666560').fetchMessage(request.messageId);
+		await logMessage.delete().catch(console.log);
 		await message.delete();
+		await message.reply(`Completed task: ${request.userId}`);
 	}
 };
