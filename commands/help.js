@@ -17,7 +17,7 @@ module.exports = class HelpCommand extends Command {
 	async run(message, args) {
 		if (!args) return error('Please specify what you want help with', message);
 		await message.delete();
-		await message.reply(`**${message.author.username}**, your help request has been added to queue, a moderator will get to it as soon as possible. You will be notified when it's complete!`);
+		await message.author.send(`**${message.author.username}**, your help request has been added to queue, a moderator will get to it as soon as possible. You will be notified when it's complete!`);
 
 		const embed = new RichEmbed()
 			.setColor(0xe15a2c);
