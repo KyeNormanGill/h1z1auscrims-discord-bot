@@ -4,13 +4,13 @@ const { stripIndents } = require('common-tags');
 const { error } = require('../util.js');
 const requests = require('../models/request.js');
 
-module.exports = class HelpCommand extends Command {
+module.exports = class DoneCommand extends Command {
 	constructor() {
 		super({
-			name: 'help',
+			name: 'done',
 			description: 'Doesn\'t matter anyway',
 			guildOnly: true,
-			aliases: ['request'],
+			aliases: ['complete'],
 			ownerOnly: true
 		});
 	}
