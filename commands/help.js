@@ -27,7 +27,7 @@ module.exports = class HelpCommand extends Command {
 		const item = await requests.create({ messageId: logMessage.id, content: args, userId: message.author.id });
 
 		embed.setDescription(stripIndents`
-			**User**: ${message.author.username}
+			**User**: ${message.author}
 			**Request**: ${args}
 			**Status**: Needs attention
 

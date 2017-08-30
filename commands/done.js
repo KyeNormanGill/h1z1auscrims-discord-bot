@@ -31,8 +31,8 @@ module.exports = class DoneCommand extends Command {
 
 		const embed = new RichEmbed()
 			.setDescription(stripIndents`
-				**User**: ${message.author.username}
-				**Request**: ${args}
+				**User**: ${message.client.users.get(request.userId)}
+				**Request**: ${request.content}
 				**Status**: Complete
 			`)
 			.setColor(0x4fdd24);
