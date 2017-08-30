@@ -29,6 +29,7 @@ module.exports = class HelpCommand extends Command {
 		embed.setDescription(stripIndents`
 			**User**: ${message.author.username}
 			**Request**: ${args}
+			**Status**: Needs attention
 
 			Moderators use \`-done ${item.id}\` to complete this task.
 		`);
