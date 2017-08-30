@@ -41,6 +41,5 @@ module.exports = class DoneCommand extends Command {
 
 		await logMessage.edit({ embed }).catch(console.log);
 		await message.delete();
-		await message.reply(`Completed task: ${request.id}`);
 	}
 };
