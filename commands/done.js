@@ -35,7 +35,7 @@ module.exports = class DoneCommand extends Command {
 				**Request**: ${request.content}
 				**Status**: Complete
 
-				**Finished by**: ${message.author.id}
+				**Finished by**: ${message.author}
 			`)
 			.setColor(0x4fdd24);
 
