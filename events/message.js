@@ -1,5 +1,5 @@
 const { RichEmbed } = require('discord.js');
-const triggerWords = ['nigger', 'nigga', 'negro', 'coon', 'chink'];
+const triggerWords = ['nigger', 'nigga', 'negro', 'coon', 'chink', 'gook'];
 const { stripIndents } = require('common-tags');
 
 async function handle(message) {
