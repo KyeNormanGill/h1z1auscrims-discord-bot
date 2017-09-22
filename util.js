@@ -28,7 +28,7 @@ function updateStreaming(client) {
 
 		channel.fetchMessage('343991659261984770').then(message1 => {
 			channel.fetchMessage('344337647269052416').then(message2 => {
-				channel.fetchMessage('344337647269052416').then(message3 => {
+				channel.fetchMessage('360699483367145473').then(message3 => {
 					const div1Embed = new Discord.RichEmbed().setColor(0xf63939);
 					let div1 = '__No one streaming in **Division 1**__\n\n';
 					const div2Embed = new Discord.RichEmbed().setColor(0xf63939);
