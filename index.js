@@ -17,7 +17,7 @@ client.login(token);
 client.once('ready', () => {
 	db.sync();
 	client.user.setPresence({ game: { name: 'Artful made me :>', type: 0 } });
-	util.updateStreaming(client);
+	setTimeout(() => util.updateStreaming(client), 5000);
 	setInterval(() => util.updateStreaming(client), 300000);
 });
 
