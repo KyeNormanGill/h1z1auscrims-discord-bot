@@ -20,7 +20,6 @@ function error(errorText, message) {
 }
 
 async function updateStreaming(client) {
-	console.log('ran');
 	const liveChannel = client.guilds.get('163508085497790467').channels.get('343979578089406474');
 
 	const gARoleId = '375126184859795467';
@@ -33,24 +32,23 @@ async function updateStreaming(client) {
 
 	const streamDescription = '**Players streaming H1Z1**\n\n';
 
-	let groupA = '';
+	let groupA = '__Group A Streamers__';
 
-	let groupB = '';
+	let groupB = '__Group B Streamers__';
 
-	let openG = '';
+	let openG = '__Open Group Streamers__';
 
 	const streaming = liveChannel.guild.members.filter(member => member.user.presence.game && member.user.presence.game.streaming);
+
 	for (const member of streaming.values()) {
 		const streamID = member.user.presence.game.url.split('/').slice(3).join();
 		const url = `https://api.twitch.tv/kraken/streams/${streamID}?client_id=${twitch}`;
-		console.log('1');
+
 		const { body } = await snekfetch.get(url).catch(console.error); // eslint-disable-line no-await-in-loop
-		console.log('2');
+
 		if (!body.stream) return;
-		console.log('3');
 		if (body.stream.game !== 'H1Z1') return;
-		console.log('4');
-		console.log(`${member.displayName} - ${body.stream.channel.url}`);
+
 		if (member.roles.has(gARoleId)) {
 			groupA += `**${member.displayName}** - <${body.stream.channel.url}>\n`;
 		} else if (member.roles.has(gBRoleId)) {
@@ -58,13 +56,11 @@ async function updateStreaming(client) {
 		} else if (member.roles.has(oGRoleId)) {
 			openG += `**${member.displayName}** - <${body.stream.channel.url}>\n`;
 		}
-		console.log('5');
 	}
 
 	streamEmbed.setDescription(`${streamDescription}\ns\n${groupA}\n${groupB}\n${openG}`);
-	console.log(`${streamDescription}\ns\n${groupA}\n${groupB}\n${openG}`);
+
 	await streamMessage.edit({ embed: streamEmbed }).catch(console.error);
-	console.log('updated');
 }
 
 exports.findUser = findUser;
