@@ -28,14 +28,10 @@ async function updateStreaming(client) {
 
 	const streamMessage = await liveChannel.fetchMessage('343991659261984770');
 
-	const streamEmbed = new RichEmbed().setColor(0x6441A4);
-
-	const streamDescription = '__**Players streaming H1Z1**__\n';
+	const streamEmbed = new RichEmbed().setColor(0x6441A4).setTitle('__**Players streaming H1Z1**__');
 
 	let groupA = '__**Group A** Streamers__\n';
-
 	let groupB = '__**Group B** Streamers__\n';
-
 	let openG = '__**Open Group** Streamers__\n';
 
 	const streaming = liveChannel.guild.members.filter(member => member.user.presence.game && member.user.presence.game.streaming);
@@ -58,7 +54,7 @@ async function updateStreaming(client) {
 		}
 	}
 
-	streamEmbed.setDescription(`${streamDescription}\n\n${groupA}\n${groupB}\n${openG}`);
+	streamEmbed.setDescription(`${groupA}\n${groupB}\n${openG}`);
 
 	await streamMessage.edit({ embed: streamEmbed }).catch(console.error);
 }
