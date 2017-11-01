@@ -17,8 +17,8 @@ client.login(token);
 client.once('ready', () => {
 	db.sync();
 	client.user.setPresence({ game: { name: 'Artful made me :>', type: 0 } });
-	setTimeout(() => util.updateStreaming(client), 5000);
-	setInterval(() => util.updateStreaming(client), 300000);
+	setTimeout(async() => await util.updateStreaming(client), 5000);
+	setInterval(async() => await util.updateStreaming(client), 300000);
 });
 
 client.on('message', message => require('./events/message.js').handle(message));
