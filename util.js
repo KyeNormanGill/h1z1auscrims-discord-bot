@@ -30,7 +30,7 @@ async function updateStreaming(client) {
 
 	const streamEmbed = new RichEmbed();
 
-	const streamDescription = '**Players streaming H1Z1**\n\n';
+	const streamDescription = '__**Players streaming H1Z1**__\n';
 
 	let groupA = '__**Group A** Streamers__\n';
 
