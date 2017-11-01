@@ -12,7 +12,6 @@ const client = new Client({
 	errorResponse: true
 });
 
-
 client.login(token);
 
 client.once('ready', () => {

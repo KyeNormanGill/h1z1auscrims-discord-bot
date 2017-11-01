@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const { RichEmbed } = require('discord.js');
 const snekfetch = require('snekfetch');
 const { twitch } = require('./config.json');
 
@@ -13,78 +13,54 @@ function findMember(message, args) {
 }
 
 function error(errorText, message) {
-	const embed = new Discord.RichEmbed();
+	const embed = new RichEmbed();
 	embed.setColor(0xee3737)
 		.setDescription(`:x: ${errorText}`);
 	message.channel.send({ embed });
 }
 
-function updateStreaming(client) {
-	setTimeout(() => {
-		const channel = client.guilds.get('163508085497790467').channels.get('343979578089406474');
-		const div1RoleId = '329312590390099971';
-		const div2RoleId = '329312398198702080';
-		const div3RoleId = '352088277324398592';
+async function updateStreaming(client) {
+	const liveChannel = client.guilds.get('163508085497790467').channels.get('343979578089406474');
 
-		channel.fetchMessage('343991659261984770').then(message1 => {
-			channel.fetchMessage('344337647269052416').then(message2 => {
-				channel.fetchMessage('360699483367145473').then(message3 => {
-					const div1Embed = new Discord.RichEmbed().setColor(0xf63939);
-					let div1 = '__No one streaming in **Division 1**__\n\n';
-					const div2Embed = new Discord.RichEmbed().setColor(0xf63939);
-					let div2 = '__No one streaming in **Division 2**__';
-					const div3Embed = new Discord.RichEmbed().setColor(0xf63939);
-					let div3 = '__No one streaming in **Division 3**__';
+	const gARoleId = '375126184859795467';
+	const gBRoleId = '375126417543004161';
+	const oGRoleId = '352088277324398592';
 
-					const streaming = channel.guild.members.filter(member => member.user.presence.game && member.user.presence.game.streaming);
+	const streamMessage = await liveChannel.fetchMessage('343991659261984770');
 
-					streaming.forEach(mem => {	
-						const streamID = mem.user.presence.game.url.split('/').slice(3).join();
-						const url = `https://api.twitch.tv/kraken/streams/${streamID}?client_id=${twitch}`;
+	const streamEmbed = new RichEmbed();
 
-						snekfetch.get(url).then(res => {
-							if (!res.body.stream) return;
-							if (res.body.stream.game !== 'H1Z1: King of the Kill') return;
+	const streamDescription = '**Players streaming H1Z1**\n\n';
 
-							if (mem.roles.has(div1RoleId)) {
-								if (div1.startsWith('__**Division 1 streamers**__')) {
-									div1 += `**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
-								} else {
-									div1 = `__**Division 1 streamers**__\n\n**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
-								}
-							} else
-							if (mem.roles.has(div2RoleId)) {
-								if (div2.startsWith('__**Division 2 streamers**__')) {
-									div2 += `**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
-								} else {
-									div2 = `__**Division 2 streamers**__\n\n**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
-								}
-							} else
-							if (mem.roles.has(div3RoleId)) {
-								if (div3.startsWith('__**Division 3 streamers**__')) {
-									div3 += `**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
-								} else {
-									div3 = `__**Division 3 streamers**__\n\n**${mem.displayName}** - <${res.body.stream.channel.url}>\n`;
-								}
-							}
+	let groupA = '';
 
-							console.log(`Updating live: ${new Date()}`);
+	let groupB = '';
 
-							div1Embed.setDescription(`${div1}`);
-							div2Embed.setDescription(`${div2}`);
-							div3Embed.setDescription(`${div3}`);
+	let openG = '';
 
-							message1.edit({ embed: div1Embed }).then(() => {
-								message2.edit({ embed: div2Embed }).then(() => {
-									message3.edit({ embed: div3Embed }).catch(console.error);
-								});
-							});
-						});
-					});
-				});
-			});
-		});
-	}, 10000);
+	const streaming = liveChannel.guild.members.filter(member => member.user.presence.game && member.user.presence.game.streaming);
+
+	for (const member of streaming) {
+		const streamID = member.user.presence.game.url.split('/').slice(3).join();
+		const url = `https://api.twitch.tv/kraken/streams/${streamID}?client_id=${twitch}`;
+
+		const { body: res } = await snekfetch.get(url); // eslint-disable-line no-await-in-loop
+
+		if (!res.body.stream) return;
+		if (res.body.stream.game !== 'H1Z1: King of the Kill') return;
+
+		if (member.roles.has(gARoleId)) {
+			groupA += `**${member.displayName}** - <${res.body.stream.channel.url}>\n`;
+		} else if (member.roles.has(gBRoleId)) {
+			groupB += `**${member.displayName}** - <${res.body.stream.channel.url}>\n`;
+		} else if (member.roles.has(oGRoleId)) {
+			openG += `**${member.displayName}** - <${res.body.stream.channel.url}>\n`;
+		}
+	}
+
+	streamEmbed.setDescription(`${streamDescription}\n\n${groupA}\n${groupB}\n${openG}`);
+
+	streamMessage.edit({ embed: streamEmbed });
 }
 
 exports.findUser = findUser;
