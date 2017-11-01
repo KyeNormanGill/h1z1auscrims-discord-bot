@@ -20,6 +20,7 @@ function error(errorText, message) {
 }
 
 async function updateStreaming(client) {
+	console.log('ran');
 	const liveChannel = client.guilds.get('163508085497790467').channels.get('343979578089406474');
 
 	const gARoleId = '375126184859795467';
