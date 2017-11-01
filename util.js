@@ -44,17 +44,17 @@ async function updateStreaming(client) {
 		const streamID = member.user.presence.game.url.split('/').slice(3).join();
 		const url = `https://api.twitch.tv/kraken/streams/${streamID}?client_id=${twitch}`;
 
-		const { body: res } = await snekfetch.get(url); // eslint-disable-line no-await-in-loop
+		const { body } = await snekfetch.get(url); // eslint-disable-line no-await-in-loop
 
-		if (!res.body.stream) return;
-		if (res.body.stream.game !== 'H1Z1: King of the Kill') return;
+		if (!body.stream) return;
+		if (body.stream.game !== 'H1Z1: King of the Kill') return;
 
 		if (member.roles.has(gARoleId)) {
-			groupA += `**${member.displayName}** - <${res.body.stream.channel.url}>\n`;
+			groupA += `**${member.displayName}** - <${body.stream.channel.url}>\n`;
 		} else if (member.roles.has(gBRoleId)) {
-			groupB += `**${member.displayName}** - <${res.body.stream.channel.url}>\n`;
+			groupB += `**${member.displayName}** - <${body.stream.channel.url}>\n`;
 		} else if (member.roles.has(oGRoleId)) {
-			openG += `**${member.displayName}** - <${res.body.stream.channel.url}>\n`;
+			openG += `**${member.displayName}** - <${body.stream.channel.url}>\n`;
 		}
 	}
 
