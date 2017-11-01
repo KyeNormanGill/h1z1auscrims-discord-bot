@@ -32,11 +32,11 @@ async function updateStreaming(client) {
 
 	const streamDescription = '**Players streaming H1Z1**\n\n';
 
-	let groupA = '__Group A Streamers__';
+	let groupA = '__**Group A** Streamers__\n';
 
-	let groupB = '__Group B Streamers__';
+	let groupB = '__**Group B** Streamers__\n';
 
-	let openG = '__Open Group Streamers__';
+	let openG = '__**Open Group** Streamers__\n';
 
 	const streaming = liveChannel.guild.members.filter(member => member.user.presence.game && member.user.presence.game.streaming);
 
@@ -58,7 +58,7 @@ async function updateStreaming(client) {
 		}
 	}
 
-	streamEmbed.setDescription(`${streamDescription}\ns\n${groupA}\n${groupB}\n${openG}`);
+	streamEmbed.setDescription(`${streamDescription}\n\n${groupA}\n${groupB}\n${openG}`);
 
 	await streamMessage.edit({ embed: streamEmbed }).catch(console.error);
 }
