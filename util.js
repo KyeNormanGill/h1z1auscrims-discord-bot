@@ -45,9 +45,9 @@ async function updateStreaming(client) {
 		console.log('member');
 		const streamID = member.user.presence.game.url.split('/').slice(3).join();
 		const url = `https://api.twitch.tv/kraken/streams/${streamID}?client_id=${twitch}`;
-
+		console.log('1');
 		const { body } = await snekfetch.get(url).catch(console.error); // eslint-disable-line no-await-in-loop
-
+		console.log('2');
 		if (!body.stream) return;
 		if (body.stream.game !== 'H1Z1: King of the Kill') return;
 		console.log(`${member.displayName} - ${body.stream.channel.url}`);
