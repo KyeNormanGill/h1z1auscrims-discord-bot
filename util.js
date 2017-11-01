@@ -62,8 +62,8 @@ async function updateStreaming(client) {
 	}
 
 	streamEmbed.setDescription(`${streamDescription}\ns\n${groupA}\n${groupB}\n${openG}`);
-
-	await streamMessage.edit({ embed: streamEmbed });
+	console.log(`${streamDescription}\ns\n${groupA}\n${groupB}\n${openG}`);
+	await streamMessage.edit({ embed: streamEmbed }).catch(console.error);
 	console.log('updated');
 }
 
