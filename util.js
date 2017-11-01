@@ -50,7 +50,7 @@ async function updateStreaming(client) {
 		console.log('2');
 		if (!body.stream) return;
 		console.log('3');
-		if (body.stream.game !== 'H1Z1: King of the Kill') return;
+		if (body.stream.game !== 'H1Z1') return;
 		console.log('4');
 		console.log(`${member.displayName} - ${body.stream.channel.url}`);
 		if (member.roles.has(gARoleId)) {
