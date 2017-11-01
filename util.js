@@ -40,8 +40,9 @@ async function updateStreaming(client) {
 	let openG = '';
 
 	const streaming = liveChannel.guild.members.filter(member => member.user.presence.game && member.user.presence.game.streaming);
-
+	console.log(streaming);
 	for (const member of streaming.values()) {
+		console.log('member');
 		const streamID = member.user.presence.game.url.split('/').slice(3).join();
 		const url = `https://api.twitch.tv/kraken/streams/${streamID}?client_id=${twitch}`;
 
