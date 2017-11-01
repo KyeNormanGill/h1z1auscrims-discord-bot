@@ -32,17 +32,17 @@ async function updateStreaming(client) {
 
 	const streamDescription = '**Players streaming H1Z1**\n\n';
 
-	let groupA = '';
+	const groupA = '';
 
-	let groupB = '';
+	const groupB = '';
 
-	let openG = '';
+	const openG = '';
 
 	const streaming = liveChannel.guild.members.filter(member => member.user.presence.game && member.user.presence.game.streaming);
 
 	for (const member of streaming) {
 		console.log(member);
-		const streamID = member.user.presence.game.url.split('/').slice(3).join();
+		/* Const streamID = member.user.presence.game.url.split('/').slice(3).join();
 		const url = `https://api.twitch.tv/kraken/streams/${streamID}?client_id=${twitch}`;
 
 		const { body: res } = await snekfetch.get(url); // eslint-disable-line no-await-in-loop
@@ -56,7 +56,7 @@ async function updateStreaming(client) {
 			groupB += `**${member.displayName}** - <${res.body.stream.channel.url}>\n`;
 		} else if (member.roles.has(oGRoleId)) {
 			openG += `**${member.displayName}** - <${res.body.stream.channel.url}>\n`;
-		}
+		}*/
 	}
 
 	streamEmbed.setDescription(`${streamDescription}\n\n${groupA}\n${groupB}\n${openG}`);
