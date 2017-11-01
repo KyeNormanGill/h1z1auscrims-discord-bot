@@ -28,7 +28,7 @@ async function updateStreaming(client) {
 
 	const streamMessage = await liveChannel.fetchMessage('343991659261984770');
 
-	const streamEmbed = new RichEmbed();
+	const streamEmbed = new RichEmbed().setColor(0x6441A4);
 
 	const streamDescription = '__**Players streaming H1Z1**__\n';
 
