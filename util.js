@@ -48,7 +48,7 @@ async function updateStreaming(client) {
 
 		if (!body.stream) return;
 		if (body.stream.game !== 'H1Z1: King of the Kill') return;
-
+		console.log(`${member.displayName} - ${body.stream.channel.url}`);
 		if (member.roles.has(gARoleId)) {
 			groupA += `**${member.displayName}** - <${body.stream.channel.url}>\n`;
 		} else if (member.roles.has(gBRoleId)) {
@@ -60,7 +60,8 @@ async function updateStreaming(client) {
 
 	streamEmbed.setDescription(`${streamDescription}\ns\n${groupA}\n${groupB}\n${openG}`);
 
-	streamMessage.edit({ embed: streamEmbed });
+	await streamMessage.edit({ embed: streamEmbed });
+	console.log('updated');
 }
 
 exports.findUser = findUser;
