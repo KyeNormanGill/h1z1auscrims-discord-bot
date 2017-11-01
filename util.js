@@ -58,7 +58,7 @@ async function updateStreaming(client) {
 		}
 	}
 
-	streamEmbed.setDescription(`${streamDescription}\n\n${groupA}\n${groupB}\n${openG}`);
+	streamEmbed.setDescription(`${streamDescription}\ns\n${groupA}\n${groupB}\n${openG}`);
 
 	streamMessage.edit({ embed: streamEmbed });
 }
