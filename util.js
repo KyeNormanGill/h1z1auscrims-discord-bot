@@ -49,7 +49,9 @@ async function updateStreaming(client) {
 		const { body } = await snekfetch.get(url).catch(console.error); // eslint-disable-line no-await-in-loop
 		console.log('2');
 		if (!body.stream) return;
+		console.log('3');
 		if (body.stream.game !== 'H1Z1: King of the Kill') return;
+		console.log('4');
 		console.log(`${member.displayName} - ${body.stream.channel.url}`);
 		if (member.roles.has(gARoleId)) {
 			groupA += `**${member.displayName}** - <${body.stream.channel.url}>\n`;
@@ -58,6 +60,7 @@ async function updateStreaming(client) {
 		} else if (member.roles.has(oGRoleId)) {
 			openG += `**${member.displayName}** - <${body.stream.channel.url}>\n`;
 		}
+		console.log('5');
 	}
 
 	streamEmbed.setDescription(`${streamDescription}\ns\n${groupA}\n${groupB}\n${openG}`);
