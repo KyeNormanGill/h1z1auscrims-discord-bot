@@ -32,11 +32,11 @@ async function updateStreaming(client) {
 
 	const streamDescription = '**Players streaming H1Z1**\n\n';
 
-	const groupA = '';
+	let groupA = '';
 
-	const groupB = '';
+	let groupB = '';
 
-	const openG = '';
+	let openG = '';
 
 	const streaming = liveChannel.guild.members.filter(member => member.user.presence.game && member.user.presence.game.streaming);
 
