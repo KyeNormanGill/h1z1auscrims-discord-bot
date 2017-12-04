@@ -18,6 +18,14 @@ module.exports = class LockdownCommand extends Command {
 			if (message.member.roles.has('322794011133870080') || message.member.roles.has('292271962544275456')) {
 				message.channel.overwritePermissions(message.guild.roles.get(message.guild.id), { SEND_MESSAGES: false }).then(() => {
 					message.channel.send(`**${message.channel.name}** is now muted! Use \`-unmute\` to unmute the chat. `);
+					
+					const embed = new RichEmbed()
+						.setColor(0x3689c7)
+						.setDescription(`**Channel**: ${message.channel.name}\n**Action**: Channel mute}`)
+						.setAuthor(message.member.displayName, message.author.avatarURL)
+						.setTimestamp(new Date());
+
+					message.guild.channels.get('387128087705288705').send({ embed });
 				});
 			}
 		} else {
@@ -31,7 +39,7 @@ module.exports = class LockdownCommand extends Command {
 
 			const embed = new RichEmbed()
 				.setColor(0xd64949)
-				.setDescription(`**User**: ${memberToMute.displayName}\n**Action**: mute\n**Reason**: ${reason || 'Unspecified'}`)
+				.setDescription(`**User**: ${memberToMute.displayName}\n**Action**: Mute\n**Reason**: ${reason || 'Unspecified'}`)
 				.setAuthor(message.member.displayName, message.author.avatarURL)
 				.setThumbnail(memberToMute.user.avatarURL)
 				.setTimestamp(new Date());
