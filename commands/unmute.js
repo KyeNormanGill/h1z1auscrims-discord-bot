@@ -26,9 +26,11 @@ module.exports = class LockdownCommand extends Command {
 
 			if (!memberToMute) return message.reply('Could not find a user');
 
+			if (!memberToMute.roles.has(mutedId)) return message.reply(`**${memberToMute.displayName}** is already unmuted!`);
+
 			const embed = new RichEmbed()
 				.setColor(0x2dcc58)
-				.setDescription(`**User***: ${memberToMute.displayName}`)
+				.setDescription(`**User**: ${memberToMute.displayName}`)
 				.setAuthor(message.member.displayName, message.author.avatarURL);
 
 			memberToMute.removeRole(mutedId);

@@ -27,9 +27,11 @@ module.exports = class LockdownCommand extends Command {
 
 			if (!memberToMute) return message.reply('Could not find a user');
 
+			if (memberToMute.roles.has(mutedId)) return message.reply(`**${memberToMute.displayName}** is already muted!`);
+
 			const embed = new RichEmbed()
 				.setColor(0xd64949)
-				.setDescription(`**User***: ${memberToMute.displayName}\n**Reason**: ${reason}`)
+				.setDescription(`**User**: ${memberToMute.displayName}\n**Reason**: ${reason || 'Unspecified'}`)
 				.setAuthor(message.member.displayName, message.author.avatarURL);
 
 			memberToMute.addRole(mutedId);
