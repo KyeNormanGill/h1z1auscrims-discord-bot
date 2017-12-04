@@ -31,7 +31,8 @@ client.on('voiceStateUpdate', async(o, n) => {
 			.setAuthor(log.executor.username, log.executor.avatarURL)
 			.setDescription(`**Action**: Voice ${n.serverMute ? 'mute' : 'unmute'}\n**User**: ${log.target.username}\n**Reason**: ${log.reason || 'Unspecified'}`)
 			.setTimestamp(new Date())
-			.setThumbnail(log.target.avatarURL);
+			.setThumbnail(log.target.avatarURL)
+			.setFooter('Automated Audit Log');
 
 		o.guild.channels.get('387128087705288705').send({ embed });
 	}
@@ -47,7 +48,8 @@ client.on('guildMemberRemove', async mem => {
 			.setAuthor(log.executor.username, log.executor.avatarURL)
 			.setDescription(`**Action**: Kick\n**User**: ${log.target.username}\n**Reason**: ${log.reason || 'Unspecified'}`)
 			.setTimestamp(new Date())
-			.setThumbnail(log.target.avatarURL);
+			.setThumbnail(log.target.avatarURL)
+			.setFooter('Automated Audit Log');
 
 		mem.guild.channels.get('387128087705288705').send({ embed });
 	}
@@ -63,7 +65,8 @@ client.on('guildBanAdd', async(g, u) => {
 			.setAuthor(log.executor.username, log.executor.avatarURL)
 			.setDescription(`**Action**: Ban\n**User**: ${log.target.username}\n**Reason**: ${log.reason || 'Unspecified'}`)
 			.setTimestamp(new Date())
-			.setThumbnail(log.target.avatarURL);
+			.setThumbnail(log.target.avatarURL)
+			.setFooter('Automated Audit Log');
 
 		g.channels.get('387128087705288705').send({ embed });
 	}
@@ -81,7 +84,8 @@ client.on('guildMemberUpdate', async(o, n) => {
 				.setAuthor(log.executor.username, log.executor.avatarURL)
 				.setDescription(`**Action**: Rename\n**User**: ${log.target.username}\n**Reason**: ${log.reason || 'Unspecified'}`)
 				.setTimestamp(new Date())
-				.setThumbnail(log.target.avatarURL);
+				.setThumbnail(log.target.avatarURL)
+				.setFooter('Automated Audit Log');
 
 			o.guild.channels.get('387128087705288705').send({ embed });
 		}
