@@ -28,7 +28,7 @@ client.on('voiceStateUpdate', async(o, n) => {
 		const log = audit.entries.first();
 		const embed = new RichEmbed()
 			.setColor(0xdde72f)
-			.setAuthor(log.executor.avatarURL, log.executor.username)
+			.setAuthor(log.executor.avatarURL.replace('?size=2048', ''), log.executor.username)
 			.setDescription(`**Action**: Voice ${n.serverMute ? 'mute' : 'unmute'}\n**User**: ${log.target.username}\n**Reason**: ${log.reason || 'Unspecified'}`)
 			.setTimestamp(new Date())
 			.setThumbnail(log.target.avatarURL);
@@ -44,7 +44,7 @@ client.on('guildMemberRemove', async mem => {
 	if (log.target.id === mem.id && log.action === 'MEMBER_KICK' && log.createdTimestamp > (new Date().getTime() - 5000)) {
 		const embed = new RichEmbed()
 			.setColor(0xdde72f)
-			.setAuthor(log.executor.avatarURL, log.executor.username)
+			.setAuthor(log.executor.avatarURL.replace('?size=2048', ''), log.executor.username)
 			.setDescription(`**Action**: Kick\n**User**: ${log.target.username}\n**Reason**: ${log.reason || 'Unspecified'}`)
 			.setTimestamp(new Date())
 			.setThumbnail(log.target.avatarURL);
@@ -60,7 +60,7 @@ client.on('guildBanAdd', async(g, u) => {
 	if (log.target.id === u.id && log.action === 'MEMBER_BAN_ADD' && log.createdTimestamp > (new Date().getTime() - 5000)) {
 		const embed = new RichEmbed()
 			.setColor(0xdde72f)
-			.setAuthor(log.executor.avatarURL, log.executor.username)
+			.setAuthor(log.executor.avatarURL.replace('?size=2048', ''), log.executor.username)
 			.setDescription(`**Action**: Ban\n**User**: ${log.target.username}\n**Reason**: ${log.reason || 'Unspecified'}`)
 			.setTimestamp(new Date())
 			.setThumbnail(log.target.avatarURL);
@@ -76,10 +76,10 @@ client.on('guildMemberUpdate', async(o, n) => {
 
 		if (log.target === log.executor) return;
 		if (log.target.id === n.id && log.action === 'MEMBER_UPDATE' && log.createdTimestamp > (new Date().getTime() - 5000)) {
-			console.log(log.executor.avatarURL);
+			console.log(log.executor.avatarURL.replace('?size=2048', ''));
 			const embed = new RichEmbed()
 				.setColor(0xdde72f)
-				.setAuthor(log.executor.avatarURL, log.executor.username)
+				.setAuthor(log.executor.avatarURL.replace('?size=2048', ''), log.executor.username)
 				.setDescription(`**Action**: Rename\n**User**: ${log.target.username}\n**Reason**: ${log.reason || 'Unspecified'}`)
 				.setTimestamp(new Date())
 				.setThumbnail(log.target.avatarURL);
