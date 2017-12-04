@@ -9,14 +9,14 @@ async function handle(message) {
 		await message.reply('Please do not use racial slurs in discord. Your message has been deleted and you are now muted.');
 
 		const embed = new RichEmbed()
-			.setColor(0xf93535)
+			.setColor(0xdde72f)
 			.setDescription(stripIndents`
-				**User**: ${message.author.tag} (${message.author.id})
-				**Action**: Mute because racial slurs
+				**Action**: Automated Racial filter
+				**User**: ${message.author.tag}
 				**Message Content**: ${message.content}
 			`);
 
-		await message.guild.channels.get('351251057407557634').send({ embed });
+		await message.guild.channels.get('387128087705288705').send({ embed });
 	}
 }
 

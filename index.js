@@ -4,6 +4,7 @@ const { token } = require('./config.json');
 const { RichEmbed } = require('discord.js');
 const util = require('./util.js');
 const db = require('./providers/sqlite.js');
+const { stripIndents } = require('common-tags');
 
 const client = new Client({
 	owners: ['189696688657530880'],
@@ -29,7 +30,11 @@ client.on('voiceStateUpdate', async(o, n) => {
 		const embed = new RichEmbed()
 			.setColor(0xdde72f)
 			.setAuthor(log.executor.username, log.executor.avatarURL)
-			.setDescription(`**Action**: Voice ${n.serverMute ? 'mute' : 'unmute'}\n**User**: ${log.target.username}\n**Reason**: ${log.reason || 'Unspecified'}`)
+			.setDescription(stripIndents`
+				**Action**: Voice ${n.serverMute ? 'mute' : 'unmute'}
+				**User**: ${log.target.tag}
+				**Reason**: ${log.reason || 'Unspecified'}
+			`)
 			.setTimestamp(new Date())
 			.setThumbnail(log.target.avatarURL)
 			.setFooter('Automated Audit Log');
@@ -46,7 +51,11 @@ client.on('guildMemberRemove', async mem => {
 		const embed = new RichEmbed()
 			.setColor(0xdde72f)
 			.setAuthor(log.executor.username, log.executor.avatarURL)
-			.setDescription(`**Action**: Kick\n**User**: ${log.target.username}\n**Reason**: ${log.reason || 'Unspecified'}`)
+			.setDescription(stripIndents`
+				**Action**: Kick
+				**User**: ${log.target.tag}
+				**Reason**: ${log.reason || 'Unspecified'}
+			`)
 			.setTimestamp(new Date())
 			.setThumbnail(log.target.avatarURL)
 			.setFooter('Automated Audit Log');
@@ -63,7 +72,11 @@ client.on('guildBanAdd', async(g, u) => {
 		const embed = new RichEmbed()
 			.setColor(0xdde72f)
 			.setAuthor(log.executor.username, log.executor.avatarURL)
-			.setDescription(`**Action**: Ban\n**User**: ${log.target.username}\n**Reason**: ${log.reason || 'Unspecified'}`)
+			.setDescription(stripIndents`
+				**Action**: Ban
+				**User**: ${log.target.tag}
+				**Reason**: ${log.reason || 'Unspecified'}
+			`)
 			.setTimestamp(new Date())
 			.setThumbnail(log.target.avatarURL)
 			.setFooter('Automated Audit Log');
@@ -82,7 +95,11 @@ client.on('guildMemberUpdate', async(o, n) => {
 			const embed = new RichEmbed()
 				.setColor(0xdde72f)
 				.setAuthor(log.executor.username, log.executor.avatarURL)
-				.setDescription(`**Action**: Rename\n**User**: ${log.target.username}\n**Reason**: ${log.reason || 'Unspecified'}`)
+				.setDescription(stripIndents`
+					**Action**: Rename
+					**User**: ${log.target.tag}
+					**Reason**: ${log.reason || 'Unspecified'}
+				`)
 				.setTimestamp(new Date())
 				.setThumbnail(log.target.avatarURL)
 				.setFooter('Automated Audit Log');
