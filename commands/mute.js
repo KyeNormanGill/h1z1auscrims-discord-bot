@@ -1,4 +1,5 @@
 const { Command } = require('smooth-discord.js');
+const { RichEmbed } = require('discord.js');
 const { findMember } = require('../util.js');
 const mutedId = '329522736927866880';
 
@@ -22,13 +23,18 @@ module.exports = class LockdownCommand extends Command {
 		} else {
 			const argsArr = args.split(' ');
 			const reason = argsArr.slice(1).join(' ');
-			console.log(argsArr[0]);
 			const memberToMute = findMember(message, argsArr[0]);
 
 			if (!memberToMute) return message.reply('Could not find a user');
+
+			const embed = new RichEmbed()
+				.setColor(0xd64949)
+				.setDescription(`**User***: ${memberToMute.displayName}\n**Reason**: ${reason}`)
+				.setAuthor(message.member.displayName, message.author.avatarURL);
+
 			memberToMute.addRole(mutedId);
-			message.guild.channels.get('387128087705288705').send(`User **${memberToMute.displayName}** has been muted.\nReason: **${reason}**`);
-			message.reply(`User **${memberToMute.displayName}** has been muted.\nReason: **${reason}**`);
+			message.guild.channels.get('387128087705288705').send({ embed });
+			message.reply(`User **${memberToMute.displayName}** has been muted.<#387128087705288705>`);
 		}
 	}
 };

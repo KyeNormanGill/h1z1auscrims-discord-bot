@@ -1,5 +1,6 @@
 const { Command } = require('smooth-discord.js');
 const { findMember } = require('../util.js');
+const { RichEmbed } = require('discord.js');
 const mutedId = '329522736927866880';
 
 module.exports = class LockdownCommand extends Command {
@@ -21,12 +22,17 @@ module.exports = class LockdownCommand extends Command {
 			}
 		} else {
 			const argsArr = args.split(' ');
-			console.log(argsArr[0]);
 			const memberToMute = findMember(message, argsArr[0]);
 
 			if (!memberToMute) return message.reply('Could not find a user');
+
+			const embed = new RichEmbed()
+				.setColor(0x2dcc58)
+				.setDescription(`**User***: ${memberToMute.displayName}`)
+				.setAuthor(message.member.displayName, message.author.avatarURL);
+
 			memberToMute.removeRole(mutedId);
-			message.guild.channels.get('387128087705288705').send(`User **${memberToMute.displayName}** has been unmuted.`);
+			message.guild.channels.get('387128087705288705').send({ embed });
 			message.reply(`User **${memberToMute.displayName}** has been unmuted`);
 		}
 	}

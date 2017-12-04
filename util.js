@@ -9,7 +9,9 @@ function findUser(message, args) {
 }
 
 function findMember(message, args) {
-	return message.guild.members.get(findUser(message, args).id);
+	const user = findUser(message, args);
+	if (!user) return null;
+	return message.guild.members.get(user.id);
 }
 
 function error(errorText, message) {
