@@ -33,7 +33,8 @@ module.exports = class LockdownCommand extends Command {
 				.setColor(0xd64949)
 				.setDescription(`**User**: ${memberToMute.displayName}\n**Action**: mute\n**Reason**: ${reason || 'Unspecified'}`)
 				.setAuthor(message.member.displayName, message.author.avatarURL)
-				.setThumbnail(memberToMute.user.avatarURL);
+				.setThumbnail(memberToMute.user.avatarURL)
+				.setTimestamp(new Date());
 
 			memberToMute.addRole(mutedId);
 			message.guild.channels.get('387128087705288705').send({ embed });
