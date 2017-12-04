@@ -18,7 +18,7 @@ module.exports = class LockdownCommand extends Command {
 			if (message.member.roles.has('322794011133870080') || message.member.roles.has('292271962544275456')) {
 				message.channel.overwritePermissions(message.guild.roles.get(message.guild.id), { SEND_MESSAGES: false }).then(() => {
 					message.channel.send(`**${message.channel.name}** is now muted! Use \`-unmute\` to unmute the chat. `);
-		
+
 					const embed = new RichEmbed()
 						.setColor(0x3689c7)
 						.setDescription(`**Action**: Channel mute\n**Channel**: ${message.channel.name}`)
