@@ -11,7 +11,7 @@ async function handle(message) {
 		const embed = new RichEmbed()
 			.setColor(0xdde72f)
 			.setDescription(stripIndents`
-				**Action**: Automated Racial filter
+				**Action**: Automated racial filter mute
 				**User**: ${message.author.tag}
 				**Message Content**: ${message.content}
 			`);
