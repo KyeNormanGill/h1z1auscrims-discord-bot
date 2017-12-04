@@ -76,6 +76,7 @@ client.on('guildMemberUpdate', async(o, n) => {
 
 		if (log.target === log.executor) return;
 		if (log.target.id === n.id && log.action === 'MEMBER_UPDATE' && log.createdTimestamp > (new Date().getTime() - 5000)) {
+			console.log(log.executor.avatarURL);
 			const embed = new RichEmbed()
 				.setColor(0xdde72f)
 				.setAuthor(log.executor.avatarURL, log.executor.username)
