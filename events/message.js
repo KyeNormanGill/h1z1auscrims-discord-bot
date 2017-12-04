@@ -16,7 +16,7 @@ async function handle(message) {
 				**Message Content**: ${message.content}
 			`);
 
-		await message.guild.channels.get('387128087705288705').send({ embed });
+		await message.guild.channels.get('351251057407557634').send({ embed });
 	}
 }
 
