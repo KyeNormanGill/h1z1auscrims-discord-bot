@@ -21,7 +21,7 @@ module.exports = class LockdownCommand extends Command {
 		
 					const embed = new RichEmbed()
 						.setColor(0x3689c7)
-						.setDescription(`**Channel**: ${message.channel.name}\n**Action**: Channel mute`)
+						.setDescription(`**Action**: Channel mute\n**Channel**: ${message.channel.name}`)
 						.setAuthor(message.member.displayName, message.author.avatarURL)
 						.setTimestamp(new Date());
 
@@ -39,7 +39,7 @@ module.exports = class LockdownCommand extends Command {
 
 			const embed = new RichEmbed()
 				.setColor(0xd64949)
-				.setDescription(`**User**: ${memberToMute.displayName}\n**Action**: Mute\n**Reason**: ${reason || 'Unspecified'}`)
+				.setDescription(`**Action**: Mute\n**User**: ${memberToMute.displayName}\n**Reason**: ${reason || 'Unspecified'}`)
 				.setAuthor(message.member.displayName, message.author.avatarURL)
 				.setThumbnail(memberToMute.user.avatarURL)
 				.setTimestamp(new Date());
