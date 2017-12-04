@@ -21,7 +21,7 @@ module.exports = class LockdownCommand extends Command {
 					
 					const embed = new RichEmbed()
 						.setColor(0x3689c7)
-						.setDescription(`**Channel**: ${message.channel.name}\n**Action**: Channel unmute}`)
+						.setDescription(`**Channel**: ${message.channel.name}\n**Action**: Channel unmute`)
 						.setAuthor(message.member.displayName, message.author.avatarURL)
 						.setTimestamp(new Date());
 
