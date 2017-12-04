@@ -27,6 +27,7 @@ module.exports = class LockdownCommand extends Command {
 
 			if (!memberToMute) return message.reply('Could not find a user');
 			memberToMute.addRole(mutedId);
+			message.guild.channels.get('387128087705288705').send(`User **${memberToMute.displayName}** has been muted.\nReason: **${reason}**`);
 			message.reply(`User **${memberToMute.displayName}** has been muted.\nReason: **${reason}**`);
 		}
 	}
