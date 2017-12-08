@@ -14,11 +14,11 @@ module.exports = class LockdownCommand extends Command {
 	}
 
 	run(message, args) {
-		if (!args) {
-			if (message.member.roles.has('322794011133870080') || message.member.roles.has('292271962544275456')) {
+		if (message.member.roles.has('322794011133870080') || message.member.roles.has('292271962544275456')) {
+			if (!args) {
 				message.channel.overwritePermissions(message.guild.roles.get(message.guild.id), { SEND_MESSAGES: null }).then(() => {
 					message.channel.send(`**${message.channel.name}** is now unmuted!`);
-					
+
 					const embed = new RichEmbed()
 						.setColor(0x3689c7)
 						.setDescription(`**Action**: Channel unmute\n**Channel**: ${message.channel.name}`)
@@ -27,25 +27,25 @@ module.exports = class LockdownCommand extends Command {
 
 					message.guild.channels.get('387128087705288705').send({ embed });
 				});
+			} else {
+				const argsArr = args.split(' ');
+				const memberToMute = findMember(message, argsArr[0]);
+
+				if (!memberToMute) return message.reply('Could not find a user');
+
+				if (!memberToMute.roles.has(mutedId)) return message.reply(`**${memberToMute.displayName}** is already unmuted!`);
+
+				const embed = new RichEmbed()
+					.setColor(0x2dcc58)
+					.setDescription(`**Action**: Unmute\n**User**: ${memberToMute.displayName}`)
+					.setAuthor(message.member.displayName, message.author.avatarURL)
+					.setThumbnail(memberToMute.user.avatarURL)
+					.setTimestamp(new Date());
+
+				memberToMute.removeRole(mutedId);
+				message.guild.channels.get('387128087705288705').send({ embed });
+				message.reply(`User **${memberToMute.displayName}** has been unmuted`);
 			}
-		} else {
-			const argsArr = args.split(' ');
-			const memberToMute = findMember(message, argsArr[0]);
-
-			if (!memberToMute) return message.reply('Could not find a user');
-
-			if (!memberToMute.roles.has(mutedId)) return message.reply(`**${memberToMute.displayName}** is already unmuted!`);
-
-			const embed = new RichEmbed()
-				.setColor(0x2dcc58)
-				.setDescription(`**Action**: Unmute\n**User**: ${memberToMute.displayName}`)
-				.setAuthor(message.member.displayName, message.author.avatarURL)
-				.setThumbnail(memberToMute.user.avatarURL)
-				.setTimestamp(new Date());
-
-			memberToMute.removeRole(mutedId);
-			message.guild.channels.get('387128087705288705').send({ embed });
-			message.reply(`User **${memberToMute.displayName}** has been unmuted`);
 		}
 	}
 };
