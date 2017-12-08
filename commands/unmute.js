@@ -18,14 +18,6 @@ module.exports = class LockdownCommand extends Command {
 			if (!args) {
 				message.channel.overwritePermissions(message.guild.roles.get(message.guild.id), { SEND_MESSAGES: null }).then(() => {
 					message.channel.send(`**${message.channel.name}** is now unmuted!`);
-
-					const embed = new RichEmbed()
-						.setColor(0x3689c7)
-						.setDescription(`**Action**: Channel unmute\n**Channel**: ${message.channel.name}`)
-						.setAuthor(message.member.displayName, message.author.avatarURL)
-						.setTimestamp(new Date());
-
-					message.guild.channels.get('387128087705288705').send({ embed });
 				});
 			} else {
 				const argsArr = args.split(' ');
