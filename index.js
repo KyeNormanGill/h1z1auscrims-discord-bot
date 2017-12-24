@@ -18,7 +18,7 @@ client.login(token);
 
 client.once('ready', () => {
 	db.sync();
-	client.user.setPresence({ game: { name: 'More features coming soon...', type: 0 } });
+	client.user.setPresence({ game: { name: 'owo', type: 0 } });
 	setTimeout(() => util.updateStreaming(client), 5000);
 	setInterval(() => util.updateStreaming(client), 300000);
 });
